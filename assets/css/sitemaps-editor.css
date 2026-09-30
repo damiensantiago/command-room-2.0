@@ -1,0 +1,198 @@
+/*
+ * Command Room — pantalla "Sitemaps".
+ * Se carga junto a meta-editor.css (mismo elemento .cmdroom-metadata-wrap
+ * trae los tokens --cmdroom-*) y añade solo lo propio de esta pantalla:
+ * la tarjeta con la tabla de definiciones, el panel de Variables por fila y
+ * las filas de la pestaña Avanzado.
+ */
+
+.cmdroom-sitemaps-panel[hidden] {
+	display: none;
+}
+
+/* La tabla de definiciones necesita más de los 900px que usan Metas/Datos
+   estructurados (pensados para un bloque de texto o un JSON, no una tabla
+   de 13 columnas) -- aquí el contenedor usa todo el ancho del área de
+   contenido de wp-admin. */
+.cmdroom-sitemaps-wrap .cmdroom-md-container {
+	max-width: none;
+}
+
+.cmdroom-sitemaps-wrap .cmdroom-md-intro,
+.cmdroom-sitemaps-wrap .cmdroom-md-footer {
+	max-width: 900px;
+}
+
+.cr-card {
+	background: var(--cmdroom-bg);
+	border: 2px solid var(--cmdroom-divider);
+	border-radius: 0;
+}
+
+.cmdroom-sitemaps-table-wrap {
+	overflow-x: auto;
+	margin-bottom: 16px;
+}
+
+.cmdroom-sitemaps-table {
+	min-width: 1100px;
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12.5px;
+}
+
+.cmdroom-sitemaps-table th,
+.cmdroom-sitemaps-table td {
+	padding: 8px 10px;
+	border-bottom: 1px solid var(--cmdroom-divider);
+	text-align: left;
+	vertical-align: middle;
+}
+
+.cmdroom-sitemaps-table thead th {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: #fff;
+	background: var(--cr-table-head);
+	border-bottom: none;
+}
+
+.cmdroom-md-footer-list {
+	list-style: none;
+	margin: 12px 0 0;
+	padding: 0;
+	font-size: 13.5px;
+	line-height: 1.6;
+	color: var(--cmdroom-text-muted);
+}
+.cmdroom-md-footer-list li + li { margin-top: 4px; }
+.cmdroom-md-footer-list strong { color: var(--cmdroom-text); }
+
+.cmdroom-sitemaps-row.is-inactive {
+	opacity: .5;
+}
+
+.cmdroom-sitemaps-table input[type="text"],
+.cmdroom-sitemaps-table input[type="number"],
+.cmdroom-sitemaps-table select {
+	width: 100%;
+	min-width: 90px;
+	font-size: 12.5px;
+}
+
+.cmdroom-sitemaps-lang {
+	min-width: 60px !important;
+	width: 60px !important;
+}
+
+.cmdroom-sitemaps-limit {
+	min-width: 80px !important;
+	width: 80px !important;
+}
+
+.cmdroom-sitemaps-view {
+	text-align: center;
+}
+
+.cmdroom-sitemaps-view[aria-disabled="true"] {
+	opacity: .45;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.cmdroom-sitemaps-vars-row[hidden] {
+	display: none;
+}
+
+.cmdroom-sitemaps-vars-panel {
+	background: var(--cmdroom-neutral-100);
+	padding: 14px;
+}
+
+.cmdroom-sitemaps-vars-title {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: var(--cmdroom-accent-dark);
+	margin: 0 0 12px;
+}
+
+.cmdroom-sitemaps-vars-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+	gap: 12px;
+}
+
+.cmdroom-sitemaps-vars-field label {
+	display: block;
+	font-size: 11.5px;
+	font-weight: 600;
+	color: var(--cmdroom-text-muted);
+	margin-bottom: 4px;
+}
+
+.cmdroom-sitemaps-vars-field select {
+	width: 100%;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+}
+
+/* Pestaña Avanzado */
+
+.cmdroom-sitemaps-advanced-row {
+	display: grid;
+	grid-template-columns: 220px 1fr;
+	gap: 12px;
+	padding: 14px 0;
+	align-items: start;
+}
+
+.cmdroom-sitemaps-advanced-row-bordered {
+	border-bottom: 1px solid var(--cmdroom-divider);
+}
+
+.cmdroom-sitemaps-advanced-row + .cmdroom-sitemaps-advanced-row {
+	border-top: 1px solid var(--cmdroom-divider);
+}
+
+.cmdroom-sitemaps-advanced-row > div {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+}
+
+.cmdroom-sitemaps-news-name {
+	max-width: 360px;
+	width: 100%;
+}
+
+.cmdroom-sitemaps-advanced-help {
+	font-size: 12px;
+	color: var(--cmdroom-text-muted);
+}
+
+.cmdroom-sitemaps-section-title {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: var(--cmdroom-accent-dark);
+	margin: 20px 0 6px;
+}
+
+.cmdroom-sitemaps-checkbox-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 18px;
+}
+
+.cmdroom-sitemaps-checkbox {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 13px;
+}

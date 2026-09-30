@@ -1,0 +1,480 @@
+/*
+ * Command Room — pantalla "Variables" (handoff alta fidelidad 2026-09-25).
+ * Carga junto a meta-editor.css (tokens) + servidor-editor.css (.cr-card,
+ * .cr-btn-*, .cr-seg/.cr-seg-opt, .cr-pill, .cr-input ya viven ahí) — aquí
+ * solo la tabla-grid de variables, la barra de herramientas y los
+ * controles de valor (texto/select/imagen/solo lectura) que son propios de
+ * esta pantalla.
+ */
+
+.cmdroom-variables-wrap .cmdroom-md-tabs {
+	flex-wrap: wrap;
+}
+
+.cmdroom-md-tab {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.cr-var-count {
+	font-weight: 600;
+	font-size: 11px;
+	padding: 1px 6px;
+	background: var(--cmdroom-neutral-100);
+	color: var(--cmdroom-text-muted);
+}
+
+/* — Sub-tabs (Componentes) — */
+
+.cr-vars-subtabs {
+	display: flex;
+	overflow-x: auto;
+	border-bottom: 1px solid var(--cmdroom-divider);
+	margin: 4px 0 20px;
+}
+
+.cr-vars-subtab {
+	border: none;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 14px;
+	font-family: inherit;
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var(--cmdroom-text-muted);
+	border-bottom: 2px solid transparent;
+	cursor: pointer;
+}
+
+.cr-vars-subtab.is-active {
+	color: var(--cmdroom-text);
+	border-bottom-color: var(--cmdroom-text);
+}
+
+/* — Toolbar — */
+
+.cr-vars-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px 20px;
+	align-items: center;
+	padding: 14px 0 18px;
+}
+
+.cr-vars-ctx-filter {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.cr-vars-ctx-label {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: var(--cmdroom-text-muted);
+}
+
+.cr-vars-save {
+	margin-left: auto;
+	display: flex;
+	gap: 14px;
+	align-items: center;
+}
+
+.cr-vars-save-status {
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var(--cmdroom-text-muted);
+}
+
+.cr-vars-save-status.is-dirty {
+	color: var(--cmdroom-accent-dark);
+}
+
+.cr-vars-save-btn {
+	min-width: 150px;
+	text-align: left;
+	justify-content: flex-start;
+}
+
+.cr-vars-save-btn:disabled {
+	opacity: .45;
+	cursor: default;
+	background: var(--cmdroom-accent);
+	border-color: var(--cmdroom-accent);
+}
+
+/* — Card + grid — */
+
+.cr-vars-card {
+	overflow-x: auto;
+}
+
+.cr-vars-grid-wrap {
+	overflow-x: auto;
+}
+
+.cr-vars-grid {
+	min-width: 980px;
+}
+
+.cr-vars-grid-simple {
+	min-width: 0;
+}
+
+.cr-vars-row {
+	display: grid;
+	grid-template-columns: minmax(200px, 260px) minmax(0, 1fr) minmax(240px, 320px) repeat(4, 58px);
+	border-bottom: 1px solid var(--cmdroom-divider);
+}
+
+.cr-vars-grid-simple .cr-vars-row {
+	grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+}
+
+.cr-vars-row[hidden] {
+	display: none;
+}
+
+.cr-vars-row > div {
+	border-left: 1px solid var(--cmdroom-divider);
+}
+
+.cr-vars-row > div:first-child {
+	border-left: none;
+}
+
+.cr-vars-head {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: #fff;
+	background: var(--cr-table-head);
+	border-bottom: none;
+}
+
+.cr-vars-head > div {
+	padding: 10px 16px;
+	border-left-color: rgba(255, 255, 255, .12);
+}
+
+.cr-vars-ctx-head {
+	padding: 10px 0 !important;
+	text-align: center;
+}
+
+.cr-vars-ctx-head.is-filtered {
+	background: var(--cmdroom-accent);
+	color: #fff;
+}
+
+.cr-vars-group-head {
+	display: flex;
+	align-items: baseline;
+	gap: 10px;
+	padding: 18px 16px 8px;
+	border-bottom: 2px solid var(--cmdroom-divider);
+}
+
+.cr-vars-group-head[hidden] {
+	display: none;
+}
+
+.cr-vars-group-name {
+	font-weight: 700;
+	font-size: 15px;
+	font-family: inherit;
+}
+
+.cr-vars-group-count {
+	font-weight: 600;
+	font-size: 11.5px;
+	color: var(--cmdroom-text-muted);
+}
+
+/* — Celda Variable / botón copiar — */
+
+.cr-vars-cell-var {
+	padding: 14px 16px;
+	display: flex;
+	align-items: flex-start;
+}
+
+.cr-vars-copy {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 8px;
+	border: 1px solid var(--cmdroom-neutral-100);
+	background: var(--cmdroom-neutral-100);
+	cursor: pointer;
+	border-radius: 0;
+}
+
+.cr-vars-copy code {
+	font-weight: 500;
+	font-size: 12.5px;
+	font-family: ui-monospace, Menlo, monospace;
+	color: var(--cmdroom-text);
+	background: none;
+	padding: 0;
+}
+
+.cr-vars-copy:hover {
+	background: var(--cmdroom-accent-100);
+	border-color: var(--cmdroom-accent-100);
+}
+
+.cr-vars-copy-icon {
+	width: 14px;
+	height: 14px;
+	flex: none;
+	display: inline-block;
+	background: currentColor;
+	color: var(--cmdroom-text-muted);
+	-webkit-mask: var(--cr-icon-copy) center / contain no-repeat;
+	mask: var(--cr-icon-copy) center / contain no-repeat;
+}
+
+.cr-vars-copy.is-copied {
+	background: var(--cmdroom-accent-100);
+	border-color: var(--cmdroom-accent);
+}
+
+.cr-vars-copy.is-copied .cr-vars-copy-icon {
+	color: var(--cmdroom-accent-dark);
+	-webkit-mask: var(--cr-icon-check) center / contain no-repeat;
+	mask: var(--cr-icon-check) center / contain no-repeat;
+}
+
+/* — Celda Descripción — */
+
+.cr-vars-cell-desc {
+	padding: 14px 16px;
+}
+
+.cr-vars-name {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	font-weight: 600;
+	font-size: 14px;
+	color: var(--cmdroom-text);
+}
+
+.cr-vars-desc-text {
+	font-size: 13px;
+	line-height: 1.55;
+	color: var(--cmdroom-text-muted);
+	margin: 4px 0 0;
+	text-wrap: pretty;
+}
+
+.cr-vars-pill-alias {
+	background: var(--cmdroom-neutral-100);
+	color: var(--cmdroom-text);
+	text-transform: uppercase;
+	font-size: 10.5px;
+	padding: 2px 6px;
+}
+
+.cr-vars-pill-noquotes {
+	background: var(--cmdroom-accent-100);
+	color: var(--cmdroom-accent-dark);
+	text-transform: uppercase;
+	font-size: 10.5px;
+	padding: 2px 6px;
+}
+
+/* — Celda Valor — */
+
+.cr-vars-cell-value {
+	padding: 12px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	justify-content: center;
+}
+
+.cr-vars-auto {
+	font-weight: 600;
+	font-size: 10.5px;
+	text-transform: uppercase;
+	color: var(--cmdroom-text-muted);
+}
+
+.cr-vars-value {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.cr-vars-value.is-dirty {
+	background: var(--cmdroom-accent-100);
+	margin: -6px -10px;
+	padding: 6px 10px;
+}
+
+.cr-vars-value.is-dirty .cr-input,
+.cr-vars-value.is-dirty .cr-vars-image-box {
+	border-color: var(--cmdroom-accent);
+	box-shadow: inset 3px 0 0 var(--cmdroom-accent);
+}
+
+.cr-vars-readonly {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	background: var(--cmdroom-neutral-100);
+	padding: 8px 10px;
+	word-break: break-all;
+}
+
+.cr-vars-help {
+	font-size: 11.5px;
+	line-height: 1.45;
+	color: var(--cmdroom-text-muted);
+	margin: 0;
+}
+
+.cr-vars-reset {
+	border: none;
+	background: none;
+	padding: 0;
+	margin-left: 6px;
+	font-weight: 600;
+	font-size: 11.5px;
+	color: var(--cmdroom-accent-dark);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* — Imagen (favicon / respaldo) — */
+
+.cr-vars-image-box {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	border: 1px solid var(--cmdroom-divider);
+	padding: 6px;
+}
+
+.cr-vars-image-thumb {
+	width: 34px;
+	height: 34px;
+	flex: none;
+	background: var(--cmdroom-neutral-100);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.cr-vars-image-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.cr-vars-image-name {
+	flex: 1;
+	min-width: 0;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	color: var(--cmdroom-text-muted);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cr-vars-image-btn,
+.cr-vars-image-remove {
+	flex: none;
+	border: 1px solid var(--cmdroom-text);
+	background: transparent;
+	font-weight: 600;
+	font-size: 12px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.cr-vars-image-btn:hover,
+.cr-vars-image-remove:hover {
+	background: var(--cmdroom-accent-100);
+}
+
+.cr-vars-image-remove {
+	border-color: var(--cmdroom-divider);
+	color: var(--cmdroom-text-muted);
+}
+
+/* — Contexto (4 celdas) — */
+
+.cr-vars-ctx-cell {
+	padding-top: 20px;
+	text-align: center;
+}
+
+.cr-vars-ctx-cell.is-filtered {
+	background: var(--cmdroom-accent-100);
+}
+
+.cr-vars-dot {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border: 1px solid var(--cmdroom-neutral-300, #d7d3d3);
+}
+
+.cr-vars-dot.is-on {
+	background: var(--cmdroom-text);
+	border-color: var(--cmdroom-text);
+}
+
+.cr-vars-ctx-cell.is-filtered .cr-vars-dot.is-on {
+	background: var(--cmdroom-accent);
+	border-color: var(--cmdroom-accent);
+}
+
+/* — Estado vacío — */
+
+.cr-vars-empty {
+	padding: 40px 16px;
+	text-align: center;
+}
+
+.cr-vars-empty[hidden] {
+	display: none;
+}
+
+.cr-vars-empty p {
+	font-weight: 600;
+	font-size: 14px;
+	margin: 0 0 14px;
+}
+
+.cr-vars-empty .cr-btn-secondary {
+	border: 2px solid var(--cmdroom-text);
+}
+
+/* — Iconos (Lucide copy/check, inline vía mask para heredar color) — */
+
+.cmdroom-variables-wrap {
+	--cr-icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E");
+	--cr-icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+@media (max-width: 782px) {
+	.cr-vars-save {
+		margin-left: 0;
+		width: 100%;
+		justify-content: space-between;
+	}
+}

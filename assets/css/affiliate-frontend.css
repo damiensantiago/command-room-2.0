@@ -1,0 +1,253 @@
+/* Command Room — Módulo de afiliación (front-end). Solo se encola cuando el
+   componente está activo (Cmdroom_Affiliate::maybe_enqueue_frontend()).
+   A propósito NO usa los tokens --cmdroom-* del admin (Modernist): el
+   handoff pide que el módulo reproduzca "el estilo del tema del sitio"
+   (radios redondeados, pills, monoespaciada) porque en producción hereda la
+   apariencia del tema activo -- aquí se define un juego de tokens propio,
+   neutro pero ya "temático" (radios grandes, pills, mono para metadatos),
+   para que se vea coherente en cualquier sitio incluso antes de que el CSS
+   del tema lo sobrescriba a propósito. Compartida por admin (vista previa,
+   ver Cmdroom_Components_Admin::enqueue_assets()) y front-end real -- nunca
+   se desincronizan porque los dos usan Cmdroom_Affiliate::render(). */
+
+.cr-aff {
+	--cr-aff-accent: #ec3013;
+	--cr-aff-text: #201e1d;
+	--cr-aff-muted: #6b7280;
+	--cr-aff-bg: #f3f2f2;
+	--cr-aff-divider: #dcdad9;
+	--cr-aff-card-bg: #ffffff;
+
+	display: block;
+	background: var( --cr-aff-bg );
+	border: 1px solid var( --cr-aff-divider );
+	border-radius: 12px;
+	padding: 20px;
+	margin: 24px 0;
+	color: var( --cr-aff-text );
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.cr-aff-eyebrow {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-weight: 600;
+	font-size: 10.5px;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: #a81f0a;
+	margin: 0 0 6px;
+}
+
+.cr-aff-title {
+	font-weight: 700;
+	font-size: 19px;
+	line-height: 1.3;
+	margin: 0 0 14px;
+}
+
+.cr-aff-disclosure {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 11px;
+	color: var( --cr-aff-muted );
+	margin: -6px 0 14px;
+}
+
+/* — Grid — */
+
+.cr-aff-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 170px, 1fr ) );
+	gap: 12px;
+}
+
+.cr-aff-card {
+	background: var( --cr-aff-card-bg );
+	border: 1px solid var( --cr-aff-divider );
+	border-radius: 10px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.cr-aff-card-media {
+	display: block;
+	height: 90px;
+	border-bottom: 1px solid var( --cr-aff-divider );
+	background: #fafafa;
+}
+
+.cr-aff-img-placeholder {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: repeating-linear-gradient( 45deg, #f0f0ef, #f0f0ef 8px, #e6e5e4 8px, #e6e5e4 16px );
+}
+
+.cr-aff-card-body {
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	flex: 1;
+}
+
+.cr-aff-badge {
+	display: inline-flex;
+	align-self: flex-start;
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-weight: 600;
+	font-size: 9.5px;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+	background: #fbe4de;
+	color: #a81f0a;
+	border-radius: 999px;
+	padding: 3px 8px;
+}
+
+.cr-aff-name {
+	font-weight: 700;
+	font-size: 13.5px;
+	line-height: 1.3;
+	margin: 0;
+}
+
+.cr-aff-name--lg {
+	font-size: 19px;
+}
+
+.cr-aff-desc {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 11.5px;
+	line-height: 1.5;
+	color: var( --cr-aff-muted );
+	margin: 0;
+	flex: 1;
+}
+
+.cr-aff-desc--lg {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 12px;
+	line-height: 1.6;
+}
+
+.cr-aff-rating {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 11px;
+	color: var( --cr-aff-muted );
+	margin: 0;
+}
+
+.cr-aff-stars {
+	color: #e3a21a;
+	letter-spacing: 1px;
+}
+
+.cr-aff-btn {
+	display: inline-flex;
+	align-self: flex-start;
+	font-weight: 700;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: #fff;
+	background: var( --cr-aff-text );
+	border-radius: 999px;
+	padding: 10px 16px;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.cr-aff-btn--accent {
+	background: var( --cr-aff-accent );
+}
+
+.cr-aff-btn--lg {
+	padding: 12px 26px;
+	font-size: 12px;
+}
+
+.cr-aff-foot {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 11.5px;
+	color: var( --cr-aff-muted );
+	margin: 12px 0 0;
+}
+
+.cr-aff-foot a {
+	color: #a81f0a;
+	font-weight: 600;
+}
+
+/* — Producto único — */
+
+.cr-aff--single {
+	display: grid;
+	grid-template-columns: minmax( 120px, 170px ) minmax( 0, 1fr );
+	gap: 20px;
+	align-items: start;
+}
+
+.cr-aff-single-media a {
+	display: block;
+	aspect-ratio: 1;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.cr-aff-single-body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	min-width: 0;
+}
+
+.cr-aff-single-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.cr-aff-pill-disclosure {
+	display: inline-flex;
+	align-self: flex-start;
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 11px;
+	background: #fff;
+	border: 1px solid var( --cr-aff-divider );
+	border-radius: 999px;
+	padding: 4px 10px;
+	margin: 0;
+}
+
+/* — Carrusel (Recomendaciones automáticas → formato Carrusel) — */
+
+.cr-aff-carousel-track {
+	display: flex;
+	gap: 12px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	padding-bottom: 4px;
+}
+
+.cr-aff-carousel-item {
+	flex: none;
+	width: 220px;
+	scroll-snap-align: start;
+}
+
+/* — Responsive <600px — */
+
+@media ( max-width: 600px ) {
+	.cr-aff-grid {
+		grid-template-columns: 1fr;
+	}
+	.cr-aff--single {
+		grid-template-columns: 1fr;
+	}
+	.cr-aff-single-media a {
+		aspect-ratio: 16 / 9;
+	}
+}

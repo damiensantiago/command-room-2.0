@@ -1,0 +1,279 @@
+/*
+ * Command Room -- Sitemap HTML, front-end público.
+ * Hereda tipografía y color del tema (currentColor): líneas y textos
+ * secundarios se derivan del color del texto, así funciona igual en claro
+ * y en oscuro sin tokens propios del tema.
+ */
+.cr-hm {
+	--cr-hm-line: color-mix(in srgb, currentColor 14%, transparent);
+	--cr-hm-line-strong: color-mix(in srgb, currentColor 45%, transparent);
+	--cr-hm-muted: color-mix(in srgb, currentColor 60%, transparent);
+	--cr-hm-gap: clamp(20px, 3vw, 32px);
+	box-sizing: border-box;
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: clamp(32px, 6vw, 72px) 16px clamp(48px, 8vw, 96px);
+}
+.cr-hm *,
+.cr-hm *::before,
+.cr-hm *::after {
+	box-sizing: border-box;
+}
+.cr-hm--embed {
+	padding: 0;
+	max-width: none;
+}
+.cr-hm a {
+	color: inherit;
+	text-decoration: none;
+}
+.cr-hm a:hover,
+.cr-hm a:focus-visible {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.cr-hm ul,
+.cr-hm ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Cabecera */
+.cr-hm__crumbs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	font-size: 14px;
+	color: var(--cr-hm-muted);
+	margin-bottom: 16px;
+}
+.cr-hm__crumbs [aria-current] {
+	color: inherit;
+	font-weight: 600;
+}
+.cr-hm__crumb-sep { opacity: .6; }
+.cr-hm__head {
+	margin-bottom: calc(var(--cr-hm-gap) * 1.5);
+	padding-bottom: var(--cr-hm-gap);
+	border-bottom: 1px solid var(--cr-hm-line);
+}
+.cr-hm__title {
+	font-size: clamp(34px, 6vw, 64px);
+	line-height: 1.02;
+	margin: 0 0 12px;
+}
+.cr-hm__sub {
+	margin: 0;
+	font-size: 17px;
+	color: var(--cr-hm-muted);
+}
+
+/* Bloques */
+.cr-hm__blocks {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+	gap: calc(var(--cr-hm-gap) * 1.5) var(--cr-hm-gap);
+}
+.cr-hm__blocks--extra {
+	margin-top: calc(var(--cr-hm-gap) * 2);
+	padding-top: calc(var(--cr-hm-gap) * 1.5);
+	border-top: 1px solid var(--cr-hm-line);
+}
+.cr-hm__block {
+	min-width: 0;
+}
+.cr-hm__block--wide {
+	grid-column: 1 / -1;
+}
+.cr-hm__block-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 12px;
+	padding-bottom: 8px;
+	border-bottom: 2px solid currentColor;
+}
+.cr-hm__block-title {
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	margin: 0;
+}
+.cr-hm__meta {
+	font-size: 13px;
+	color: var(--cr-hm-muted);
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+.cr-hm__dim {
+	color: var(--cr-hm-muted);
+}
+
+/* Listas */
+.cr-hm__row {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	padding: 10px 0;
+	border-bottom: 1px solid var(--cr-hm-line);
+}
+.cr-hm__row > a,
+.cr-hm__row > .cr-hm__dim {
+	flex: 1;
+	min-width: 0;
+	font-weight: 500;
+	line-height: 1.35;
+}
+.cr-hm__num {
+	font-size: 13px;
+	font-variant-numeric: tabular-nums;
+	color: var(--cr-hm-muted);
+	min-width: 2ch;
+}
+.cr-hm__block--wide .cr-hm__list {
+	columns: 2 360px;
+	column-gap: var(--cr-hm-gap);
+}
+.cr-hm__block--wide .cr-hm__row {
+	break-inside: avoid;
+}
+
+/* Chips: fila con scroll horizontal (días) o en varias líneas (tags) */
+.cr-hm__chips {
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
+	scroll-snap-type: x proximity;
+	padding-bottom: 6px;
+	scrollbar-width: thin;
+}
+.cr-hm__chips--wrap {
+	flex-wrap: wrap;
+	overflow: visible;
+}
+.cr-hm__chips > li {
+	flex: 0 0 auto;
+	scroll-snap-align: start;
+}
+.cr-hm__chip {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 8px;
+	padding: 8px 12px;
+	border: 1px solid var(--cr-hm-line);
+	border-radius: 999px;
+	font-size: 14px;
+	white-space: nowrap;
+	transition: border-color .15s;
+}
+.cr-hm a.cr-hm__chip:hover,
+.cr-hm a.cr-hm__chip:focus-visible {
+	border-color: currentColor;
+	text-decoration: none;
+}
+.cr-hm__more {
+	display: inline-block;
+	margin-top: 12px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+/* Celdas: años, meses, días */
+.cr-hm__cells {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+	gap: 8px;
+}
+.cr-hm__cells--grid {
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+}
+.cr-hm__cells--days {
+	grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+}
+.cr-hm__cell {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	height: 100%;
+	padding: 14px;
+	border: 1px solid var(--cr-hm-line);
+	transition: border-color .15s;
+}
+.cr-hm a.cr-hm__cell:hover,
+.cr-hm a.cr-hm__cell:focus-visible {
+	border-color: currentColor;
+	text-decoration: none;
+}
+.cr-hm__cell-label {
+	font-size: 18px;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+.cr-hm__cell.is-empty {
+	opacity: .45;
+}
+
+/* Día: navegación */
+.cr-hm__daynav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-top: var(--cr-hm-gap);
+	font-size: 15px;
+	font-weight: 600;
+}
+.cr-hm__pager {
+	display: flex;
+	gap: 4px;
+}
+.cr-hm__pager-btn {
+	display: inline-grid;
+	place-items: center;
+	min-width: 36px;
+	height: 36px;
+	border: 1px solid var(--cr-hm-line);
+}
+.cr-hm__pager-btn.is-active {
+	border-color: currentColor;
+}
+
+/* Tags A-Z */
+.cr-hm__az-row {
+	display: grid;
+	grid-template-columns: 56px 1fr;
+	gap: 16px;
+	padding: 16px 0;
+	border-bottom: 1px solid var(--cr-hm-line);
+}
+.cr-hm__az-letter {
+	font-size: 28px;
+	line-height: 1;
+	margin: 0;
+}
+
+/* Enlace del footer cuando el tema no lo coloca (fallback en wp_footer) */
+.cr-hm-footnav {
+	text-align: center;
+	padding: 12px 16px;
+	font-size: 13px;
+}
+.cr-hm-footlink {
+	color: inherit;
+}
+
+@media (max-width: 600px) {
+	.cr-hm__az-row {
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+	.cr-hm__row .cr-hm__meta {
+		display: none;
+	}
+	.cr-hm__daynav {
+		flex-wrap: wrap;
+	}
+}

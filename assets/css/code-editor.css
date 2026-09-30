@@ -1,0 +1,112 @@
+/*
+ * Command Room — pantalla "Código" (antes "Inyección de código").
+ * Carga junto a meta-editor.css + servidor-editor.css (tokens y clases
+ * .cr-* genéricas ya viven ahí) — aquí solo lo específico de esta
+ * pantalla: metadatos del escaneo, tabla de assets y el formulario de
+ * autenticación HTTP básica.
+ */
+
+/* Mismo criterio que Servidor/Configuración: el contenedor pasa a ancho
+ * completo (la tabla de assets tiene columnas anchas -- URL, descripción,
+ * dónde está activo -- y 900px la obligaba a partirse en varias líneas por
+ * fila). La intro de texto se queda más estrecha, se lee peor a 100% de
+ * ancho. */
+.cmdroom-code-wrap .cmdroom-md-container {
+	max-width: none;
+}
+
+.cmdroom-code-wrap .cmdroom-md-intro {
+	max-width: 900px;
+}
+
+.cmdroom-code-scan-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+	font-size: 12.5px;
+	color: var(--cmdroom-text-muted);
+	margin: 4px 0 20px;
+}
+
+.cmdroom-code-scan-meta form {
+	margin: 0;
+}
+
+.cmdroom-code-scan-error {
+	color: var(--cmdroom-accent-dark);
+}
+
+.cmdroom-code-card {
+	padding: 18px 20px;
+	margin-bottom: 24px;
+}
+
+.cmdroom-code-card h2 {
+	font-size: 15px;
+	margin: 0 0 12px;
+}
+
+.cmdroom-code-src {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	word-break: break-all;
+}
+
+.cmdroom-code-excerpt {
+	display: block;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	color: var(--cmdroom-text-muted);
+	margin-top: 4px;
+	word-break: break-all;
+}
+
+.cmdroom-code-desc {
+	max-width: 480px;
+}
+
+.cr-pill-sitewide {
+	background: var(--cmdroom-accent-100);
+	color: var(--cmdroom-accent-dark);
+}
+
+.cr-pill-scoped {
+	background: var(--cmdroom-neutral-100);
+	color: var(--cmdroom-text);
+}
+
+.cmdroom-code-auth {
+	margin-bottom: 20px;
+}
+
+.cmdroom-code-auth-form {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 12px;
+	max-width: 560px;
+	padding-top: 10px;
+}
+
+.cmdroom-code-auth-form .cr-label {
+	margin-bottom: 4px;
+}
+
+.cmdroom-code-auth-form input.cr-input {
+	width: 220px;
+}
+
+.cmdroom-code-injection-card {
+	padding: 18px 20px;
+	margin-bottom: 20px;
+}
+
+.cmdroom-code-injection-card h2 {
+	font-size: 14px;
+	margin: 20px 0 4px;
+}
+
+.cmdroom-code-injection-card h2:first-child {
+	margin-top: 0;
+}

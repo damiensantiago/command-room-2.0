@@ -1,0 +1,721 @@
+/* Command Room — Sitemap HTML (admin). A diferencia de Afiliación/Reco, la
+   vista previa de este componente SÍ usa Modernist (radio 0, reglas 2px,
+   Archivo) -- no reproduce el tema del sitio. Reutiliza .cr-*, .cmdroom-aff-*
+   (fila superior, activación, cabeceras de sección, shortcode, notas) ya
+   definidas en servidor-editor.css/affiliate-editor.css/reco-editor.css;
+   aquí solo lo propio de esta pantalla (barra de niveles, marco de
+   navegador simulado, migas, bloques de portada, grids año/mes, listado de
+   día, A-Z de tags). Nada de esto se imprime nunca fuera de esta pantalla
+   de admin -- no hay contraparte en el front-end en esta tarea. */
+
+.cmdroom-htmlmap-screen {
+	max-width: 980px;
+}
+
+/* — A. Fila superior — */
+
+.cmdroom-htmlmap-urlfield {
+	flex: 1;
+	min-width: 260px;
+	max-width: 520px;
+}
+
+.cmdroom-htmlmap-urlfield-box {
+	display: flex;
+	align-items: center;
+	border: 2px solid var( --cmdroom-divider );
+	background: #fff;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	padding: 0 4px;
+}
+
+.cmdroom-htmlmap-urlfield-prefix,
+.cmdroom-htmlmap-urlfield-suffix {
+	color: var( --cmdroom-neutral-700 );
+	white-space: nowrap;
+	padding: 8px 2px;
+}
+
+.cmdroom-htmlmap-urlfield-input {
+	flex: 1;
+	min-width: 0;
+	border: none;
+	background: transparent;
+	font: 600 12.5px ui-monospace, Menlo, monospace;
+	color: var( --cmdroom-text );
+	padding: 8px 2px;
+}
+
+.cmdroom-htmlmap-urlfield-input:focus {
+	outline: none;
+}
+
+/* — B. Cabecera de sección — */
+
+.cmdroom-htmlmap-hint {
+	font-size: 12.5px;
+	color: var( --cmdroom-neutral-700 );
+	margin: 2px 0 10px;
+}
+
+/* — B1. Barra de niveles — */
+
+.cmdroom-htmlmap-levelbar {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 150px, 1fr ) );
+	border: 2px solid var( --cmdroom-text );
+	border-bottom: 0;
+	background: #fff;
+}
+
+.cmdroom-htmlmap-level {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	padding: 12px 14px;
+	border-right: 1px solid var( --cmdroom-divider );
+	background: #fff;
+	color: var( --cmdroom-text );
+	text-align: left;
+	cursor: pointer;
+}
+
+.cmdroom-htmlmap-level:last-child {
+	border-right: 0;
+}
+
+.cmdroom-htmlmap-level.is-active {
+	background: var( --cmdroom-text );
+	color: #fff;
+}
+
+.cmdroom-htmlmap-level-num {
+	font-family: ui-monospace, Menlo, monospace;
+	font-weight: 600;
+	font-size: 10.5px;
+	letter-spacing: .08em;
+	opacity: .7;
+}
+
+.cmdroom-htmlmap-level-name {
+	font-family: var( --cmdroom-heading-font, "Archivo" ), sans-serif;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.cmdroom-htmlmap-level-ruta {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11.5px;
+	opacity: .8;
+	overflow-wrap: anywhere;
+}
+
+.cmdroom-htmlmap-level-desc {
+	font-size: 11.5px;
+	line-height: 1.4;
+	opacity: .8;
+}
+
+/* — B2. Marco del navegador simulado — */
+
+.cmdroom-htmlmap-frame {
+	border: 2px solid var( --cmdroom-text );
+	background: #fff;
+}
+
+.cmdroom-htmlmap-framebar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	background: var( --cmdroom-neutral-100 );
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-htmlmap-framedot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var( --cmdroom-neutral-300, #d7d3d3 );
+	flex: none;
+}
+
+.cmdroom-htmlmap-framedot + .cmdroom-htmlmap-framedot {
+	margin-left: -3px;
+}
+
+.cmdroom-htmlmap-frameurl {
+	margin-left: 6px;
+	flex: 1;
+	min-width: 0;
+	background: #fff;
+	border: 1px solid var( --cmdroom-divider );
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	padding: 4px 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.cmdroom-htmlmap-frame-off {
+	padding: 10px 24px;
+	background: var( --cmdroom-neutral-200 );
+	font-weight: 500;
+	font-size: 12.5px;
+	color: var( --cmdroom-neutral-800, var( --cmdroom-text ) );
+}
+
+.cmdroom-htmlmap-body {
+	padding: 22px 24px 28px;
+}
+
+/* — Migas — */
+
+.cmdroom-htmlmap-crumbs {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+	font-size: 12px;
+	color: var( --cmdroom-neutral-700 );
+	margin-bottom: 10px;
+}
+
+.cmdroom-htmlmap-crumb {
+	background: none;
+	border: none;
+	padding: 0;
+	color: var( --cmdroom-neutral-700 );
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.cmdroom-htmlmap-crumb.is-current {
+	color: var( --cmdroom-text );
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.cmdroom-htmlmap-crumb-sep {
+	opacity: .6;
+}
+
+.cmdroom-htmlmap-h1 {
+	font-family: var( --cmdroom-heading-font, "Archivo" ), sans-serif;
+	font-weight: 700;
+	font-size: 26px;
+	line-height: 1.2;
+	margin: 0 0 6px;
+}
+
+.cmdroom-htmlmap-sub {
+	font-size: 13px;
+	color: var( --cmdroom-neutral-700 );
+	margin: 0 0 22px;
+}
+
+/* — Bloques genéricos — */
+
+.cmdroom-htmlmap-blocks {
+	display: flex;
+	flex-direction: column;
+	gap: 28px;
+}
+
+.cmdroom-htmlmap-extra {
+	display: flex;
+	flex-direction: column;
+	gap: 28px;
+	margin-top: 32px;
+}
+
+.cmdroom-htmlmap-block {
+	border-top: 2px solid var( --cmdroom-text );
+	padding-top: 10px;
+}
+
+.cmdroom-htmlmap-block-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 12px;
+	margin-bottom: 8px;
+}
+
+.cmdroom-htmlmap-block-title {
+	font-family: var( --cmdroom-heading-font, "Archivo" ), sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+}
+
+.cmdroom-htmlmap-block-count {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11.5px;
+	color: var( --cmdroom-neutral-700 );
+	white-space: nowrap;
+}
+
+.cmdroom-htmlmap-empty-note,
+.cmdroom-htmlmap-note {
+	font-size: 11.5px;
+	color: var( --cmdroom-neutral-700 );
+	margin: 6px 0 0;
+}
+
+/* — Listas (7 días / 6 meses) — */
+
+.cmdroom-htmlmap-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.cmdroom-htmlmap-list-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	padding: 6px 0;
+	border-bottom: 1px solid var( --cmdroom-divider );
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+.cmdroom-htmlmap-list-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-htmlmap-list-title {
+	color: var( --cmdroom-text );
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
+	flex: 1;
+}
+
+.cmdroom-htmlmap-list-title--btn {
+	background: none;
+	border: none;
+	text-align: left;
+	cursor: pointer;
+	font: inherit;
+	padding: 0;
+}
+
+.cmdroom-htmlmap-list-date {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11.5px;
+	color: var( --cmdroom-neutral-700 );
+	white-space: nowrap;
+	flex: none;
+}
+
+/* — Carrusel (30 días / top tags) — */
+
+.cmdroom-htmlmap-carousel {
+	display: flex;
+	align-items: stretch;
+	gap: 6px;
+}
+
+.cmdroom-htmlmap-car-arrow {
+	width: 32px;
+	flex: none;
+	border: 2px solid var( --cmdroom-text );
+	background: #fff;
+	font-weight: 700;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.cmdroom-htmlmap-car-arrow:hover {
+	background: var( --cmdroom-neutral-100 );
+}
+
+.cmdroom-htmlmap-car-track {
+	flex: 1;
+	display: flex;
+	gap: 4px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+}
+
+.cmdroom-htmlmap-car-track::-webkit-scrollbar {
+	display: none;
+}
+
+.cmdroom-htmlmap-car-cell {
+	flex: none;
+	min-width: 76px;
+	padding: 8px 10px;
+	border: 1px solid var( --cmdroom-divider );
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	background: #fff;
+	cursor: pointer;
+	text-decoration: none;
+	scroll-snap-align: start;
+}
+
+.cmdroom-htmlmap-car-cell:hover {
+	border-color: var( --cmdroom-text );
+}
+
+.cmdroom-htmlmap-car-cell-date {
+	font-weight: 600;
+	font-size: 12.5px;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	color: var( --cmdroom-text );
+}
+
+.cmdroom-htmlmap-car-cell-num {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11px;
+	color: var( --cmdroom-neutral-700 );
+}
+
+.cmdroom-htmlmap-tagslink {
+	margin-top: 10px;
+	background: none;
+	border: none;
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var( --cmdroom-accent-700 );
+	cursor: pointer;
+	padding: 0;
+}
+
+/* — Por año — */
+
+.cmdroom-htmlmap-yeargrid {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 72px, 1fr ) );
+	gap: 4px;
+}
+
+.cmdroom-htmlmap-yearcell {
+	padding: 6px 8px;
+	border: 1px solid var( --cmdroom-divider );
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	cursor: pointer;
+	text-align: left;
+}
+
+.cmdroom-htmlmap-yearcell:hover {
+	border-color: var( --cmdroom-text );
+}
+
+.cmdroom-htmlmap-yearcell-label {
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.cmdroom-htmlmap-yearcell-meta {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11px;
+	color: var( --cmdroom-neutral-700 );
+}
+
+/* — Top contenidos — */
+
+.cmdroom-htmlmap-toplist {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.cmdroom-htmlmap-toplist-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 0;
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-htmlmap-toplist-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-htmlmap-toplist-num {
+	font-family: ui-monospace, Menlo, monospace;
+	font-weight: 600;
+	font-size: 11.5px;
+	color: var( --cmdroom-accent-700 );
+	width: 18px;
+	flex: none;
+}
+
+/* — Año / Mes — celdas — */
+
+.cmdroom-htmlmap-cellgrid {
+	display: grid;
+	gap: 6px;
+}
+
+.cmdroom-htmlmap-cellgrid--year {
+	grid-template-columns: repeat( auto-fill, minmax( 130px, 1fr ) );
+}
+
+.cmdroom-htmlmap-cellgrid--month {
+	grid-template-columns: repeat( auto-fill, minmax( 64px, 1fr ) );
+}
+
+.cmdroom-htmlmap-cell {
+	padding: 10px 12px;
+	border: 1px solid var( --cmdroom-divider );
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	cursor: pointer;
+	text-align: left;
+}
+
+.cmdroom-htmlmap-cell:hover {
+	border-color: var( --cmdroom-text );
+}
+
+.cmdroom-htmlmap-cell.is-empty {
+	opacity: .4;
+	cursor: default;
+	pointer-events: none;
+}
+
+.cmdroom-htmlmap-cell-label {
+	font-family: var( --cmdroom-heading-font, "Archivo" ), sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.cmdroom-htmlmap-cell-meta {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11px;
+	color: var( --cmdroom-neutral-700 );
+}
+
+/* — Día: listado paginado — */
+
+.cmdroom-htmlmap-daylist {
+	border-top: 2px solid var( --cmdroom-text );
+}
+
+.cmdroom-htmlmap-dayrow {
+	display: grid;
+	grid-template-columns: 28px minmax( 0, 1fr ) auto;
+	gap: 12px;
+	padding: 10px 0;
+	border-bottom: 1px solid var( --cmdroom-divider );
+	align-items: center;
+}
+
+.cmdroom-htmlmap-dayrow-num {
+	font-family: ui-monospace, Menlo, monospace;
+	font-weight: 600;
+	font-size: 11.5px;
+	color: var( --cmdroom-accent-700 );
+}
+
+.cmdroom-htmlmap-dayrow-title {
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 1.4;
+	color: var( --cmdroom-text );
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-wrap: pretty;
+}
+
+.cmdroom-htmlmap-dayrow-tag {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11px;
+	color: var( --cmdroom-neutral-700 );
+	white-space: nowrap;
+}
+
+.cmdroom-htmlmap-dayfoot {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	margin-top: 14px;
+	flex-wrap: wrap;
+}
+
+.cmdroom-htmlmap-daynav {
+	background: none;
+	border: none;
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var( --cmdroom-text );
+	cursor: pointer;
+	padding: 0;
+}
+
+.cmdroom-htmlmap-daynav.is-disabled {
+	opacity: .4;
+	pointer-events: none;
+}
+
+.cmdroom-htmlmap-pager {
+	display: flex;
+	gap: 4px;
+}
+
+.cmdroom-htmlmap-pager-btn {
+	width: 30px;
+	height: 30px;
+	border: 1px solid var( --cmdroom-divider );
+	background: #fff;
+	cursor: pointer;
+	font-size: 12.5px;
+}
+
+.cmdroom-htmlmap-pager-btn.is-active {
+	background: var( --cmdroom-text );
+	color: #fff;
+	border-color: var( --cmdroom-text );
+}
+
+/* — Tags A-Z — */
+
+.cmdroom-htmlmap-az-row {
+	display: grid;
+	grid-template-columns: 40px minmax( 0, 1fr );
+	gap: 12px;
+	padding: 10px 0;
+	border-top: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-htmlmap-az-row:first-child {
+	border-top: none;
+}
+
+.cmdroom-htmlmap-az-letter {
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 1;
+	color: var( --cmdroom-accent );
+}
+
+.cmdroom-htmlmap-az-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 16px;
+	align-content: flex-start;
+}
+
+.cmdroom-htmlmap-az-tag {
+	font-size: 13px;
+	color: var( --cmdroom-text );
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.cmdroom-htmlmap-az-tag-num {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11px;
+	color: var( --cmdroom-neutral-700 );
+	text-decoration: none;
+}
+
+/* — B8. Footer simulado — */
+
+.cmdroom-htmlmap-framefooter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 18px;
+	padding: 12px 24px;
+	border-top: 1px solid var( --cmdroom-divider );
+	background: var( --cmdroom-neutral-100 );
+	font-size: 12px;
+	color: var( --cmdroom-neutral-700 );
+}
+
+.cmdroom-htmlmap-framefooter-map {
+	background: none;
+	border: none;
+	font-weight: 600;
+	color: var( --cmdroom-accent-700 );
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	cursor: pointer;
+	padding: 0;
+	font-size: 12px;
+}
+
+/* — C. Bloques de la portada (config) — */
+
+.cmdroom-htmlmap-blockrows {
+	padding: 0;
+}
+
+.cmdroom-htmlmap-blockrow {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 12px 16px;
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-htmlmap-blockrow:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-htmlmap-blockrow-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.cmdroom-htmlmap-blockrow-title {
+	margin: 0;
+	font-weight: 600;
+	font-size: 13.5px;
+}
+
+.cmdroom-htmlmap-blockrow-desc {
+	margin: 2px 0 0;
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var( --cmdroom-neutral-700 );
+}
+
+.cmdroom-htmlmap-blockrow-n {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex: none;
+}
+
+/* — D. Páginas de archivo (config) — */
+
+.cmdroom-htmlmap-archivegrid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 240px, 1fr ) );
+	gap: 16px;
+	margin-bottom: 14px;
+}
+
+@media ( max-width: 700px ) {
+	.cmdroom-htmlmap-dayrow {
+		grid-template-columns: 24px minmax( 0, 1fr );
+	}
+	.cmdroom-htmlmap-dayrow-tag {
+		grid-column: 2;
+	}
+}

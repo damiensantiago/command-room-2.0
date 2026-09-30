@@ -1,0 +1,502 @@
+/* Command Room — pantalla "Componentes" (rediseño 2026-09-23, handoff
+   "Componentes + Ticker"). Reutiliza los tokens .cmdroom-metadata-wrap y
+   las clases .cr-* ya definidas en meta-editor.css/servidor-editor.css;
+   aquí solo lo propio de esta pantalla. Un par de tokens que el handoff
+   pide (neutral-200/800, accent-700/800) no existen todavía en el resto
+   del plugin -- se añaden aquí, sin tocar meta-editor.css. */
+
+.cmdroom-components-wrap {
+	--cmdroom-neutral-200: #e2e0df;
+	--cmdroom-neutral-800: #3d3a39;
+}
+
+/* — Barra de pestañas (zona izquierda con scroll + "Ver todos" fija) — */
+
+.cmdroom-components-tabbar {
+	display: flex;
+	border-bottom: 2px solid var( --cmdroom-divider );
+	margin-bottom: 24px;
+}
+
+.cmdroom-components-tabbar-scroll {
+	display: flex;
+	flex: 1;
+	min-width: 0;
+	overflow-x: auto;
+}
+
+.cmdroom-components-tabbar-scroll .cr-tab {
+	white-space: nowrap;
+}
+
+.cmdroom-components-tab-all {
+	flex: none;
+	border-left: 2px solid var( --cmdroom-divider );
+	color: var( --cmdroom-accent-dark );
+}
+
+.cmdroom-components-tab-pill {
+	margin-left: 6px;
+	vertical-align: middle;
+}
+
+/* — Vista "Ver todos" — */
+
+.cmdroom-components-all-list {
+	max-width: 900px;
+}
+
+.cmdroom-components-all-row {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	padding: 14px 16px;
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-components-all-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-components-all-toggle {
+	padding-top: 2px;
+}
+
+.cmdroom-components-all-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.cmdroom-components-all-name {
+	margin: 0;
+	font-weight: 600;
+	font-size: 13.5px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.cmdroom-components-all-desc {
+	margin: 4px 0 0;
+	font-size: 13px;
+	line-height: 1.5;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-components-all-configure {
+	align-self: center;
+}
+
+.cmdroom-components-all-summary {
+	margin-top: 10px;
+	font-size: 12.5px;
+	color: var( --cmdroom-text-muted );
+}
+
+/* — Placeholder "Próximamente" — */
+
+.cmdroom-components-placeholder {
+	max-width: 640px;
+	padding: 24px;
+}
+
+.cmdroom-components-placeholder-kicker {
+	display: block;
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: var( --cmdroom-accent-dark );
+}
+
+.cmdroom-components-placeholder-title {
+	margin: 6px 0 0;
+	font-family: "Archivo", sans-serif;
+	font-weight: 700;
+	font-size: 22px;
+}
+
+.cmdroom-components-placeholder-desc {
+	margin: 10px 0 0;
+	font-size: 13.5px;
+	line-height: 1.6;
+	color: var( --cmdroom-text-muted );
+}
+
+/* — Ticker: layout general — */
+
+.cmdroom-ticker-screen {
+	max-width: 900px;
+	display: grid;
+	gap: 28px;
+}
+
+/* — Ticker: A. Vista previa — */
+
+.cmdroom-ticker-preview-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	margin-bottom: 8px;
+}
+
+.cmdroom-ticker-preview-caption {
+	font-size: 12.5px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-ticker-preview-frame {
+	border: 2px solid var( --cmdroom-text );
+	background: #fff;
+	height: 170px;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.cmdroom-ticker-preview-header {
+	padding: 12px 16px;
+	border-bottom: 1px solid var( --cmdroom-divider );
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cmdroom-ticker-preview-sitename {
+	font-family: "Archivo", sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+}
+
+.cmdroom-ticker-preview-nav {
+	font-weight: 500;
+	font-size: 12.5px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-ticker-preview-body {
+	flex: 1;
+	padding: 14px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.cmdroom-ticker-preview-fake-bar {
+	display: block;
+	height: 10px;
+	background: var( --cmdroom-neutral-100 );
+}
+
+.cmdroom-ticker-preview-fake-bar--55 {
+	width: 55%;
+	background: var( --cmdroom-neutral-200 );
+}
+
+.cmdroom-ticker-preview-fake-bar--80 {
+	width: 80%;
+}
+
+.cmdroom-ticker-empty {
+	display: block;
+	padding: 9px 16px;
+	opacity: .7;
+}
+
+/* — Ticker: B. Origen + activación — */
+
+.cmdroom-ticker-origin-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.cr-seg-lg {
+	border: 2px solid var( --cmdroom-text );
+	width: max-content;
+}
+
+.cr-seg-lg .cr-seg-opt {
+	padding: 9px 18px;
+	font-size: 13px;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cmdroom-ticker-mode-dot {
+	width: 7px;
+	height: 7px;
+	background: var( --cmdroom-accent );
+	display: inline-block;
+}
+
+.cmdroom-ticker-activation {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 14px;
+	max-width: 380px;
+}
+
+.cmdroom-ticker-activation-title {
+	margin: 0;
+	font-weight: 600;
+	font-size: 13.5px;
+}
+
+.cmdroom-ticker-activation-note {
+	margin: 3px 0 0;
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-ticker-mode-desc-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	margin: 14px 0 16px;
+	padding-bottom: 14px;
+	border-bottom: 2px solid var( --cmdroom-divider );
+}
+
+.cmdroom-ticker-mode-desc {
+	margin: 0;
+	font-size: 13.5px;
+	line-height: 1.6;
+	max-width: 620px;
+}
+
+.cmdroom-ticker-mode-pill {
+	flex: none;
+}
+
+/* — Ticker: C1. Automático — */
+
+.cmdroom-ticker-auto-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.cmdroom-ticker-auto-row {
+	display: flex;
+	gap: 14px;
+	padding: 14px 16px;
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-ticker-auto-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-ticker-auto-row.is-off {
+	opacity: .5;
+}
+
+.cmdroom-ticker-auto-row-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.cmdroom-ticker-auto-row-title {
+	margin: 0;
+	font-weight: 600;
+	font-size: 13.5px;
+}
+
+.cmdroom-ticker-auto-row-desc {
+	margin: 2px 0 8px;
+	font-size: 13px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-ticker-auto-tpl {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 12.5px;
+}
+
+.cmdroom-ticker-auto-row-example {
+	margin: 6px 0 0;
+	font-size: 12px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-ticker-auto-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 200px, 1fr ) );
+	gap: 18px;
+	margin-top: 18px;
+}
+
+.cmdroom-ticker-auto-note {
+	margin-top: 10px;
+}
+
+/* — Ticker: C2. Configurado — */
+
+.cmdroom-ticker-byday-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 16px;
+}
+
+.cmdroom-ticker-byday-label {
+	font-weight: 600;
+	font-size: 13.5px;
+}
+
+.cmdroom-ticker-byday-note {
+	font-size: 12.5px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-ticker-day-tabs {
+	margin-bottom: 16px;
+}
+
+.cmdroom-ticker-day-tabs .cr-tab {
+	padding: 8px 14px;
+	font-size: 12.5px;
+}
+
+.cmdroom-ticker-msg-grid {
+	display: grid;
+	grid-template-columns: 80px minmax( 0, 2fr ) minmax( 0, 1fr ) 36px;
+	gap: 8px 10px;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.cmdroom-ticker-msg-head {
+	display: contents;
+}
+
+.cmdroom-ticker-msg-head span {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-ticker-msg-row {
+	display: contents;
+}
+
+.cmdroom-ticker-msg-num {
+	font-weight: 600;
+	font-size: 12.5px;
+	white-space: nowrap;
+}
+
+.cmdroom-ticker-msg-remove {
+	width: 36px;
+	height: 36px;
+	padding: 0 !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cmdroom-ticker-manual-note {
+	margin-top: 4px;
+}
+
+/* — Ticker: C3. Mixto — */
+
+.cmdroom-ticker-mixed-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 220px, 1fr ) );
+	gap: 18px;
+	margin-bottom: 18px;
+}
+
+.cmdroom-ticker-ratio-field {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+}
+
+.cmdroom-ticker-ratio-field input {
+	width: 60px;
+	text-align: center;
+}
+
+.cmdroom-ticker-rotation {
+	padding: 14px 16px;
+}
+
+.cmdroom-ticker-rotation-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px 0;
+	font-size: 13px;
+}
+
+.cmdroom-ticker-rotation-num {
+	color: var( --cmdroom-text-muted );
+	font-size: 12px;
+	width: 18px;
+}
+
+.cmdroom-ticker-mixed-note {
+	margin-top: 4px;
+}
+
+/* — Ticker: D. Apariencia — */
+
+.cmdroom-ticker-appearance-heading {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: var( --cmdroom-accent-dark );
+	border-top: 2px solid var( --cmdroom-divider );
+	padding-top: 14px;
+	margin: 0 0 16px;
+}
+
+.cmdroom-ticker-appearance-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 220px, 1fr ) );
+	gap: 18px;
+}
+
+.cmdroom-ticker-sep-input {
+	width: 64px;
+	text-align: center;
+}
+
+.cmdroom-ticker-colors {
+	display: flex;
+	gap: 12px;
+}
+
+.cmdroom-ticker-color {
+	width: 52px;
+	height: 34px;
+	padding: 2px;
+	border: 2px solid var( --cmdroom-divider );
+	background: var( --cmdroom-bg );
+	cursor: pointer;
+}
+
+/* — Ticker: filas de toggle genéricas (activación de pausa, etc.) — */
+
+.cmdroom-ticker-row {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.cmdroom-ticker-row-title {
+	margin: 0;
+	font-weight: 600;
+}

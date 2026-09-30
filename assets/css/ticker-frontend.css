@@ -1,0 +1,114 @@
+/* Command Room — Ticker (front-end). Solo se encola cuando el componente
+   está activo y hay mensajes que mostrar (ver Cmdroom_Ticker::maybe_hook_output).
+   Comparte marcado con la vista previa del admin -- ver Cmdroom_Ticker::render_bar(). */
+
+.cmdroom-ticker {
+	overflow: hidden;
+	background: var( --cmdroom-ticker-bg, #201e1d );
+	color: var( --cmdroom-ticker-color, #ffffff );
+	white-space: nowrap;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+}
+
+.cmdroom-ticker--fixed-bottom {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99999;
+}
+
+body.cmdroom-ticker-bottom-active {
+	padding-bottom: 40px;
+}
+
+.cmdroom-ticker-track {
+	display: inline-flex;
+	align-items: center;
+	animation: cmdroom-ticker-scroll var( --cmdroom-ticker-duration, 26s ) linear infinite;
+	will-change: transform;
+}
+
+.cmdroom-ticker--pauseable:hover .cmdroom-ticker-track {
+	animation-play-state: paused;
+}
+
+.cmdroom-ticker-content {
+	display: inline-flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.cmdroom-ticker-item {
+	display: inline-block;
+	padding: 9px 9px;
+}
+
+.cmdroom-ticker-item a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.cmdroom-ticker-sep {
+	opacity: .55;
+	padding: 0 9px;
+}
+
+@keyframes cmdroom-ticker-scroll {
+	from {
+		transform: translateX( 0 );
+	}
+	to {
+		transform: translateX( -50% );
+	}
+}
+
+/* — Accesibilidad: sin animación, un mensaje cada 5s con fundido — */
+
+@media ( prefers-reduced-motion: reduce ) {
+	.cmdroom-ticker-track {
+		animation: none;
+		display: block;
+		position: relative;
+		height: 1.6em;
+		width: 100%;
+	}
+
+	.cmdroom-ticker-content[aria-hidden] {
+		display: none;
+	}
+
+	.cmdroom-ticker-content {
+		display: block;
+		position: static;
+	}
+
+	.cmdroom-ticker-item {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		opacity: 0;
+		padding: 0 16px;
+		animation: cmdroom-ticker-fade calc( var( --cmdroom-ticker-rm-count, 1 ) * 5s ) ease-in-out infinite;
+	}
+
+	.cmdroom-ticker-sep {
+		display: none;
+	}
+}
+
+@keyframes cmdroom-ticker-fade {
+	0%, 4% {
+		opacity: 0;
+	}
+	8%, 12% {
+		opacity: 1;
+	}
+	16%, 100% {
+		opacity: 0;
+	}
+}

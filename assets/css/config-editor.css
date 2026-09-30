@@ -1,0 +1,398 @@
+/*
+ * Command Room — pantalla "Configuración" (Archivos y taxonomías +
+ * Breadcrumbs + Auto-Image SEO + Herramientas, antes cuatro pantallas
+ * sueltas). Carga junto a meta-editor.css y servidor-editor.css (de ahí
+ * salen los tokens --cmdroom-* y las clases .cr-card/.cr-tabs/.cr-toggle/
+ * .cr-chip/.cr-input/.cr-label genéricas) -- añade solo lo propio de esta
+ * pantalla.
+ */
+
+.cmdroom-config-wrap .cmdroom-md-container {
+	max-width: 900px;
+}
+
+/* — Patrón "fila de regla", reutilizado en Archivos/Breadcrumbs/Auto-Image — */
+
+.cmdroom-config-rule-list {
+	margin-bottom: 12px;
+}
+
+.cmdroom-config-rule-row {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--cmdroom-divider);
+}
+
+.cmdroom-config-rule-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-config-rule-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.cmdroom-config-rule-title {
+	font-weight: 600;
+	font-size: 13.5px;
+	margin: 0 0 3px;
+}
+
+.cmdroom-config-rule-desc {
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--cmdroom-text-muted);
+	margin: 0;
+}
+
+.cmdroom-config-rule-chip {
+	flex: none;
+	margin-top: 2px;
+}
+
+.cmdroom-config-note {
+	font-size: 12.5px;
+	line-height: 1.55;
+	color: var(--cmdroom-text-muted);
+	margin-top: 10px;
+}
+
+.cmdroom-config-extra {
+	margin-top: 40px;
+	padding-top: 16px;
+	border-top: 2px solid var(--cmdroom-divider);
+}
+
+/* Google Search Console es lo primero de Herramientas desde el reorden
+   2026-09-25 -- sin el divisor/margen de arriba, que ahí no separa de
+   nada y solo deja una línea suelta pegada al final de las pestañas. */
+.cmdroom-config-extra-first {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: none;
+}
+
+.cmdroom-config-extra h3 {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: var(--cmdroom-accent-dark);
+	margin: 0 0 8px;
+}
+
+/* — Campos en grid (Breadcrumbs, Auto-Image) — */
+
+.cmdroom-config-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+/* — Breadcrumbs: vista previa — */
+
+.cmdroom-config-crumbs-preview {
+	padding: 14px 16px;
+	margin-bottom: 20px;
+	font-weight: 600;
+	font-size: 13.5px;
+	color: var(--cmdroom-accent-dark);
+}
+
+/* — Auto-Image: variables + vista previa — */
+
+.cmdroom-config-vars {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	font-size: 12.5px;
+	color: var(--cmdroom-text-muted);
+	margin: 0 0 20px;
+}
+
+.cmdroom-config-vars .cr-chip {
+	cursor: pointer;
+	background: none;
+}
+
+.cmdroom-config-vars .cr-chip:hover {
+	background: var(--cmdroom-neutral-100);
+}
+
+.cmdroom-config-imgseo-preview {
+	padding: 12px 16px;
+	margin-bottom: 20px;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+/* — Herramientas — */
+
+.cmdroom-config-tools-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 16px;
+	/* Aire alrededor de las tarjetas de importación (Rank Math/Yoast),
+	   pedido por el administrador 2026-09-25 -- separación clara de CrUX arriba y
+	   de "Salida en el sitio" abajo. */
+	margin: 32px 0;
+}
+
+.cmdroom-config-tools-card {
+	padding: 18px;
+}
+
+.cmdroom-config-tools-title {
+	font-family: var(--font-heading, inherit);
+	font-weight: 700;
+	font-size: 16px;
+	margin: 0 0 6px;
+}
+
+.cmdroom-config-tools-text {
+	font-size: 13px;
+	line-height: 1.55;
+	color: var(--cmdroom-text-muted);
+	margin: 0 0 14px;
+}
+
+.cmdroom-config-tools-checks {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 18px;
+	margin-bottom: 16px;
+	font-size: 13px;
+}
+
+.cmdroom-config-tools-action-row {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+.cmdroom-config-tools-status {
+	font-size: 13px;
+	color: var(--cmdroom-text-muted);
+}
+
+/* — IA (llms.txt + markdown de páginas) y Tags — */
+
+.cmdroom-ia-block {
+	padding: 20px 22px;
+	margin-bottom: 20px;
+}
+
+.cmdroom-ia-block-head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 14px;
+}
+
+.cmdroom-ia-block-title {
+	font-family: var(--font-heading, inherit);
+	font-weight: 700;
+	font-size: 16px;
+	margin: 0 0 4px;
+}
+
+/* "Salida en el sitio" agrupa 4 formularios independientes (Metas/Datos
+   estructurados/Sitemaps/Redirecciones, cada uno con su propio guardado)
+   dentro de un único cuadro -- pedido por el administrador 2026-09-25. El divisor
+   entre cada <h2> los distingue visualmente sin que parezca un solo
+   formulario mezclado. */
+.cmdroom-tools-salida-card h2:not(.cmdroom-ia-block-title) {
+	font-size: 14px;
+	margin: 20px 0 4px;
+	padding-top: 16px;
+	border-top: 1px solid var(--cmdroom-divider);
+}
+
+.cmdroom-tags-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.cmdroom-tags-header-actions .cr-input {
+	width: 220px;
+}
+
+.cmdroom-tags-custom-pill {
+	margin-left: 8px;
+}
+
+.cmdroom-ia-field {
+	margin-bottom: 16px;
+}
+
+.cmdroom-ia-field:last-child {
+	margin-bottom: 0;
+}
+
+.cmdroom-ia-textarea {
+	width: 100%;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	line-height: 1.6;
+	resize: vertical;
+}
+
+.cmdroom-ia-check {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.cmdroom-tags-limit-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 8px;
+}
+
+.cmdroom-tags-status {
+	font-size: 12.5px;
+	font-weight: 600;
+	color: var(--cmdroom-accent-dark);
+	margin: 0 0 12px;
+}
+
+.cmdroom-tags-status.is-error {
+	color: #c0392b;
+}
+
+.cmdroom-tags-subtabs {
+	margin-bottom: 18px;
+}
+
+.cmdroom-tags-bulk-count {
+	font-size: 12.5px;
+	font-weight: 600;
+	color: var(--cmdroom-text-muted);
+	margin: 4px 0 18px;
+}
+
+.cmdroom-tags-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+
+.cmdroom-tags-table th,
+.cmdroom-tags-table td {
+	text-align: left;
+	padding: 10px 8px;
+	border-bottom: 1px solid var(--cmdroom-divider);
+	vertical-align: middle;
+}
+
+.cmdroom-tags-table thead th {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: #fff;
+	background: var(--cr-table-head);
+	font-weight: 600;
+	border-bottom: none;
+}
+
+.cmdroom-tags-row.is-empty td:first-child {
+	color: var(--cmdroom-accent-dark);
+}
+
+.cmdroom-tags-merge-select {
+	max-width: 180px;
+}
+
+.cmdroom-tags-delete-btn {
+	background: none;
+	border: none;
+	color: #c0392b;
+	font-size: 12.5px;
+	font-weight: 600;
+	cursor: pointer;
+	padding: 4px 6px;
+}
+
+.cmdroom-tags-delete-btn:hover {
+	text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+	.cmdroom-config-rule-row {
+		flex-wrap: wrap;
+	}
+	.cmdroom-config-rule-chip {
+		order: 3;
+		margin-left: 54px;
+	}
+}
+
+/* — Coexistencia con Rank Math / Yoast SEO — pintado antes de los toggles
+   de "Salida en el sitio" para que el riesgo de doble output se vea primero — */
+
+.cmdroom-seo-coexist {
+	margin-bottom: 20px;
+	border: 1px solid var(--cmdroom-divider);
+}
+
+.cmdroom-seo-coexist.is-warning {
+	border: 2px solid var(--cmdroom-accent);
+	background: var(--cmdroom-accent-100);
+}
+
+.cmdroom-seo-coexist-title {
+	margin-top: 0;
+}
+
+.cmdroom-seo-coexist-ok {
+	color: var(--cmdroom-text-muted);
+	margin-bottom: 0;
+}
+
+.cmdroom-seo-coexist-warn {
+	color: var(--cmdroom-accent-dark);
+	font-weight: 600;
+	margin-top: 0;
+}
+
+.cmdroom-seo-coexist-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 10px;
+}
+
+.cmdroom-seo-coexist-badge {
+	display: inline-block;
+	background: var(--cmdroom-accent);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+
+.cmdroom-seo-coexist-btn.button.button-primary {
+	background: var(--cmdroom-accent-dark);
+	border-color: var(--cmdroom-accent-dark);
+}
+
+.cmdroom-seo-coexist-btn.button.button-primary:hover {
+	background: var(--cmdroom-accent);
+	border-color: var(--cmdroom-accent);
+}

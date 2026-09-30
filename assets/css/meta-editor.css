@@ -1,0 +1,273 @@
+/*
+ * Command Room — pantalla "Meta data" (Metas)
+ * Recreación en wp-admin del diseño hifi entregado por Claude Design.
+ * Tokens tomados literalmente del handoff (design system "Modernist").
+ * Scope: solo .cmdroom-metadata-wrap, no afecta a otras pantallas del plugin.
+ */
+
+/*
+ * La tipografía "Archivo" se declaraba en font-family pero nunca se
+ * cargaba -- el navegador caía siempre a system-ui/San Francisco.
+ * Mismo @import que usa el propio sistema de diseño "Modernist"
+ * (styles.css del handoff): pesos 400/500/600/700/800 cubren todo lo
+ * que usan las hojas de este plugin (cuerpo, botones/th en 600,
+ * títulos en 700, valores destacados hasta 800).
+ */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap');
+
+.cmdroom-metadata-wrap {
+	--cmdroom-bg: #f3f2f2;
+	--cmdroom-text: #201e1d;
+	--cmdroom-text-muted: #6b7280;
+	--cmdroom-accent: #ec3013;
+	--cmdroom-accent-dark: #a81f0a;
+	--cmdroom-accent-100: #fbe4de;
+	--cmdroom-neutral-100: #ebebea;
+	--cmdroom-divider: #dcdad9;
+	--cmdroom-terminal-bg: #0d0d0d;
+	--cmdroom-terminal-bar: #1c1c1c;
+	--cmdroom-terminal-text: #ffffff;
+	--cmdroom-terminal-var: #f97316;
+	--cmdroom-dot-red: #ff5f56;
+	--cmdroom-dot-amber: #ffbd2e;
+	--cmdroom-dot-green: #27c93f;
+	--cr-table-head: #111827;
+
+	background: var(--cmdroom-bg);
+	color: var(--cmdroom-text);
+	padding: 20px;
+	font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.cmdroom-metadata-wrap * {
+	box-sizing: border-box;
+}
+
+.cmdroom-md-h1 {
+	width: 100%;
+	text-align: center;
+	font-family: inherit;
+	font-weight: 800 !important;
+	font-size: 48px !important;
+	line-height: 0.95;
+	letter-spacing: -0.02em;
+	color: var(--cmdroom-text);
+	margin: 0 0 20px;
+	padding-bottom: 14px;
+	border-bottom: 4px solid var(--cmdroom-text);
+}
+
+.cmdroom-md-container {
+	max-width: 900px;
+}
+
+.cmdroom-md-intro {
+	font-size: 13.5px;
+	font-weight: 400;
+	line-height: 1.6;
+	color: var(--cmdroom-text-muted);
+	max-width: 900px;
+	margin: 0 0 16px;
+}
+
+/* 3. Desplegable de variables */
+
+.cmdroom-md-vars {
+	max-width: 900px;
+	margin: 0 0 24px;
+}
+
+.cmdroom-md-vars summary {
+	font-weight: 600;
+	font-size: 13px;
+	color: var(--cmdroom-accent);
+	cursor: pointer;
+	padding: 8px 0;
+	list-style: none;
+}
+
+.cmdroom-md-vars summary::-webkit-details-marker {
+	display: none;
+}
+
+.cmdroom-md-vars-row {
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
+	padding: 12px 2px 4px;
+}
+
+.cmdroom-md-chip {
+	display: inline-flex;
+	padding: 2px 7px;
+	border: 1px solid var(--cmdroom-divider);
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	color: var(--cmdroom-text-muted);
+	margin: 0 2px;
+	flex: none;
+	white-space: nowrap;
+}
+
+/* 4. Tabs */
+
+.cmdroom-md-tabs {
+	display: flex;
+	border-bottom: 2px solid var(--cmdroom-divider);
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
+.cmdroom-md-tab {
+	border: none;
+	background: transparent;
+	padding: 10px 16px;
+	font-family: inherit;
+	font-weight: 600;
+	font-size: 13.5px;
+	color: var(--cmdroom-text-muted);
+	border-bottom: 3px solid transparent;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+.cmdroom-md-tab.is-active {
+	color: var(--cmdroom-text);
+	border-bottom-color: var(--cmdroom-accent);
+}
+
+/* 5. Bloques de código (uno por elemento dentro de cada panel) */
+
+.cmdroom-md-panel[hidden] {
+	display: none;
+}
+
+.cmdroom-md-block {
+	max-width: 900px;
+	margin: 0 0 24px;
+}
+
+.cmdroom-md-block-label {
+	display: block;
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var(--cmdroom-text-muted);
+	margin-bottom: 6px;
+}
+
+/* En Metas y Datos estructurados esta etiqueta repite el nombre de la
+   pestaña activa justo encima (Home/Categorías/...) -- se oculta solo
+   aquí para subir el terminal. En Robots.txt el mismo label lleva texto
+   propio ("Contenido de /robots.txt") y debe seguir viéndose. */
+.cmdroom-meta-wrap .cmdroom-md-block-label,
+.cmdroom-schema-wrap .cmdroom-md-block-label {
+	display: none;
+}
+
+.cmdroom-md-terminal {
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+	border: 1px solid #2a2a2a;
+	max-width: 900px;
+}
+
+.cmdroom-md-terminal-bar {
+	background: var(--cmdroom-terminal-bar);
+	padding: 9px 14px;
+	display: flex;
+	gap: 7px;
+	align-items: center;
+}
+
+.cmdroom-md-dot {
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.cmdroom-md-dot-red {
+	background: var(--cmdroom-dot-red);
+}
+
+.cmdroom-md-dot-amber {
+	background: var(--cmdroom-dot-amber);
+}
+
+.cmdroom-md-dot-green {
+	background: var(--cmdroom-dot-green);
+}
+
+.cmdroom-md-terminal-body {
+	background: var(--cmdroom-terminal-bg);
+	padding: 16px;
+}
+
+.cmdroom-md-code {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	line-height: 1.7;
+	white-space: pre-wrap;
+	word-break: break-word;
+	color: var(--cmdroom-terminal-text);
+	min-height: calc(10 * 1.7 * 12.5px);
+	outline: none;
+}
+
+.cmdroom-md-code .cmdroom-md-var {
+	color: var(--cmdroom-terminal-var);
+}
+
+.cmdroom-md-code-source {
+	display: none;
+}
+
+/* 6. Botón Guardar */
+
+.cmdroom-md-save {
+	background: var(--cmdroom-accent) !important;
+	border-color: var(--cmdroom-accent) !important;
+	color: #fff !important;
+	border-radius: 0 !important;
+	padding: 9px 18px !important;
+	height: auto !important;
+	font-weight: 600 !important;
+	font-size: 13.5px !important;
+	text-align: left;
+	margin-top: 22px !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+
+.cmdroom-md-save:hover,
+.cmdroom-md-save:focus {
+	background: var(--cmdroom-accent-dark) !important;
+	border-color: var(--cmdroom-accent-dark) !important;
+	color: #fff !important;
+}
+
+/* 7. Más información */
+
+.cmdroom-md-footer {
+	border-top: 2px solid var(--cmdroom-divider);
+	margin-top: 48px;
+	padding-top: 16px;
+	max-width: 900px;
+}
+
+.cmdroom-md-footer-title {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--cmdroom-accent-dark);
+	margin: 0 0 8px;
+}
+
+.cmdroom-md-footer-text {
+	font-size: 13.5px;
+	line-height: 1.6;
+	color: var(--cmdroom-text-muted);
+	margin: 0;
+}

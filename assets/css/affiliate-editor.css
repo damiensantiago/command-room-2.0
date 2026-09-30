@@ -1,0 +1,459 @@
+/* Command Room — Módulo de afiliación (admin). Reutiliza los tokens
+   .cmdroom-metadata-wrap/.cmdroom-components-wrap y las clases .cr-* ya
+   definidas en meta-editor.css/servidor-editor.css/components-editor.css --
+   aquí solo lo propio de esta pantalla. Dos tokens que el handoff pide
+   (accent-700/800, neutral-700) no existen todavía en el resto del plugin --
+   se añaden aquí, sin tocar los otros CSS (mismo patrón que
+   components-editor.css con neutral-200/800). */
+
+.cmdroom-components-wrap {
+	--cmdroom-accent-700: #c22a10;
+	--cmdroom-accent-800: #a81f0a;
+	--cmdroom-neutral-700: #6b7280;
+}
+
+.cmdroom-aff-screen {
+	max-width: 900px;
+	display: grid;
+	gap: 28px;
+}
+
+/* — A. Fila superior — */
+
+.cmdroom-aff-top-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.cmdroom-aff-format-seg {
+	white-space: nowrap;
+	overflow-x: auto;
+	max-width: 100%;
+}
+
+.cmdroom-aff-activation {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 14px;
+	max-width: 380px;
+}
+
+.cmdroom-aff-activation-title {
+	margin: 0;
+	font-weight: 600;
+	font-size: 13.5px;
+}
+
+.cmdroom-aff-activation-note {
+	margin: 3px 0 0;
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var( --cmdroom-text-muted );
+}
+
+/* — B1. Vista previa — */
+
+.cmdroom-aff-preview-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	margin-bottom: 8px;
+}
+
+.cmdroom-aff-preview-note {
+	font-size: 12.5px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-aff-preview-frame {
+	border: 2px solid var( --cmdroom-text );
+	background: #fff;
+	padding: 20px;
+}
+
+.cmdroom-aff-preview-box .cr-aff {
+	margin: 0;
+}
+
+.cmdroom-aff-preview-empty {
+	font-size: 13px;
+	color: var( --cmdroom-text-muted );
+	margin: 0;
+}
+
+.cmdroom-aff-preview-caption {
+	margin: 8px 0 0;
+	font-size: 12px;
+	color: var( --cmdroom-text-muted );
+}
+
+/* — Cabeceras de sección (Productos/Textos/Enlaces y ubicación/Biblioteca) — */
+
+.cmdroom-aff-section-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 16px;
+	font-family: var( --cmdroom-heading-font, "Archivo" ), sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 2px solid var( --cmdroom-divider );
+}
+
+.cmdroom-aff-section-note {
+	font-size: 12.5px;
+	font-weight: 500;
+	color: var( --cmdroom-neutral-700 );
+	text-align: right;
+}
+
+.cmdroom-aff-note {
+	font-size: 12.5px;
+	line-height: 1.6;
+	color: var( --cmdroom-text-muted );
+	margin: -4px 0 14px;
+}
+
+/* — B2. Productos — */
+
+.cmdroom-aff-products {
+	display: grid;
+	gap: 12px;
+}
+
+.cmdroom-aff-product {
+	padding: 14px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.cmdroom-aff-product--dim {
+	opacity: .55;
+}
+
+.cmdroom-aff-product-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.cmdroom-aff-product-num {
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var( --cmdroom-text-muted );
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.cmdroom-aff-pill-accent {
+	background: var( --cmdroom-accent-100 );
+	color: var( --cmdroom-accent-800, var( --cmdroom-accent-dark ) );
+}
+
+.cmdroom-aff-pill-muted {
+	background: var( --cmdroom-neutral-200 );
+	color: var( --cmdroom-neutral-700 );
+}
+
+.cmdroom-aff-product-actions {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.cmdroom-aff-remove {
+	width: 32px;
+	height: 32px;
+	padding: 0 !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cmdroom-aff-product-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr;
+	gap: 10px;
+}
+
+.cmdroom-aff-product-grid--ratings {
+	grid-template-columns: 1fr 1fr;
+	max-width: 360px;
+}
+
+.cmdroom-aff-mono {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 12.5px;
+}
+
+.cmdroom-aff-link-line {
+	font-size: 12px;
+	color: var( --cmdroom-text-muted );
+	margin: 0;
+}
+
+.cmdroom-aff-add-row {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	margin-top: 4px;
+}
+
+.cmdroom-aff-add-row select {
+	max-width: 320px;
+}
+
+/* — B3. Textos — */
+
+.cmdroom-aff-texts-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 260px, 1fr ) );
+	gap: 14px;
+}
+
+.cmdroom-aff-texts-2col {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+/* — B4. Enlaces y ubicación — */
+
+.cmdroom-aff-links-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 220px, 1fr ) );
+	gap: 18px;
+	margin-bottom: 18px;
+}
+
+.cmdroom-aff-rel-readonly {
+	padding: 8px 11px;
+	background: var( --cmdroom-neutral-100 );
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 12.5px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-aff-placement-row {
+	display: flex;
+	gap: 24px;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	margin-bottom: 16px;
+}
+
+.cmdroom-aff-para-field {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.cmdroom-aff-para-input {
+	width: 70px;
+	text-align: center;
+}
+
+.cmdroom-aff-newtab-row {
+	margin-bottom: 18px;
+}
+
+.cmdroom-aff-shortcode-box {
+	margin-top: 4px;
+}
+
+.cmdroom-aff-shortcode-code {
+	display: inline-block;
+	background: var( --cmdroom-neutral-100 );
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 12.5px;
+	padding: 6px 10px;
+}
+
+/* — C1. Biblioteca — */
+
+.cmdroom-aff-lib-tools {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.cmdroom-aff-lib-search {
+	width: 220px;
+}
+
+.cmdroom-aff-lib-table {
+	padding: 0;
+}
+
+.cmdroom-aff-lib-head {
+	display: grid;
+	grid-template-columns: minmax( 0, 2fr ) minmax( 0, 2fr ) 110px 120px;
+	background: var( --cmdroom-neutral-100 );
+	border-bottom: 2px solid var( --cmdroom-divider );
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-aff-lib-head span {
+	padding: 10px 14px;
+}
+
+.cmdroom-aff-lib-row {
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-aff-lib-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-aff-lib-row-main {
+	display: grid;
+	grid-template-columns: minmax( 0, 2fr ) minmax( 0, 2fr ) 110px 120px;
+	align-items: center;
+}
+
+.cmdroom-aff-lib-row-main > div {
+	padding: 12px 14px;
+}
+
+.cmdroom-aff-lib-name {
+	margin: 0;
+	font-weight: 600;
+	font-size: 13.5px;
+}
+
+.cmdroom-aff-lib-meta {
+	margin: 2px 0 0;
+	font-size: 12px;
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-aff-lib-cell-cats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.cmdroom-aff-lib-cell-actions {
+	display: flex;
+	gap: 6px;
+	justify-content: flex-end;
+}
+
+.cmdroom-aff-lib-edit {
+	padding: 16px;
+	background: var( --cmdroom-neutral-100 );
+	display: grid;
+	gap: 12px;
+}
+
+.cmdroom-aff-lib-edit[hidden] {
+	display: none;
+}
+
+.cmdroom-aff-cat-picker {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.cmdroom-aff-cat-btn {
+	background: var( --cmdroom-bg );
+	border: 1px solid var( --cmdroom-divider );
+	border-radius: 999px;
+	font-size: 12px;
+}
+
+.cmdroom-aff-cat-btn.is-active {
+	background: var( --cmdroom-text );
+	color: #fff;
+	border-color: var( --cmdroom-text );
+}
+
+.cmdroom-aff-cat-btn.is-active::before {
+	content: "✓ ";
+}
+
+.cmdroom-aff-lib-empty {
+	padding: 24px;
+	text-align: center;
+	color: var( --cmdroom-text-muted );
+	font-size: 13px;
+	margin: 0;
+}
+
+.cmdroom-aff-lib-empty[hidden] {
+	display: none;
+}
+
+/* — C2. Recomendaciones automáticas por categoría — */
+
+.cmdroom-aff-rules-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.cmdroom-aff-rule-row {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 12px 16px;
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-aff-rule-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-aff-rule-row--off {
+	opacity: .7;
+}
+
+.cmdroom-aff-rule-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.cmdroom-aff-rule-name {
+	margin: 0;
+	font-weight: 600;
+	font-size: 13.5px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.cmdroom-aff-rule-count {
+	font-weight: 500;
+	font-size: 12px;
+	color: var( --cmdroom-text-muted );
+}
+
+.cmdroom-aff-rule-format--disabled {
+	opacity: .45;
+	pointer-events: none;
+}
+
+@media ( max-width: 700px ) {
+	.cmdroom-aff-lib-head,
+	.cmdroom-aff-lib-row-main {
+		grid-template-columns: 1fr;
+	}
+	.cmdroom-aff-lib-cell-actions {
+		justify-content: flex-start;
+	}
+}

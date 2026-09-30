@@ -1,0 +1,132 @@
+/* Command Room — Carrusel de recomendación de contenidos (admin). Reutiliza
+   a propósito la mayoría de clases .cmdroom-aff-* ya definidas en
+   affiliate-editor.css (fila superior, vista previa, cabeceras de sección,
+   pills, filas tipo tarjeta, biblioteca/chips) -- mismas convenciones que
+   pide el handoff ("sigue las mismas convenciones que design_handoff_afiliacion").
+   Aquí solo lo propio de esta pantalla que no tiene equivalente ya hecho. */
+
+.cmdroom-reco-mode-desc {
+	font-size: 13.5px;
+	line-height: 1.6;
+	color: var( --cmdroom-text-muted );
+	margin: -12px 0 0;
+}
+
+.cmdroom-reco-preview .cr-reco-title[contenteditable] {
+	outline: none;
+}
+
+/* — C. Contenidos fijados — */
+
+.cmdroom-reco-pin-row {
+	display: grid;
+	grid-template-columns: 160px minmax( 0, 1fr );
+	gap: 16px;
+	align-items: start;
+	padding: 12px 16px;
+}
+
+.cmdroom-reco-pin-col1 {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.cmdroom-reco-pin-col2 select {
+	width: 100%;
+	max-width: 480px;
+}
+
+.cmdroom-reco-pin-now {
+	margin: 6px 0 0;
+	font-size: 12px;
+	color: var( --cmdroom-text-muted );
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 480px;
+}
+
+.cmdroom-reco-sec-picker {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.cmdroom-reco-sec-seg {
+	flex-wrap: wrap;
+	max-width: 100%;
+}
+
+/* — D. Webs amigas — */
+
+.cmdroom-reco-network-notice {
+	background: var( --cmdroom-accent-100 );
+	border: 2px solid var( --cmdroom-accent );
+	padding: 16px 18px;
+}
+
+.cmdroom-reco-network-notice-title {
+	margin: 0 0 4px;
+	font-weight: 700;
+	font-size: 14px;
+	color: var( --cmdroom-accent-800, var( --cmdroom-accent-dark ) );
+}
+
+.cmdroom-reco-network-notice-text {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.55;
+	color: var( --cmdroom-accent-800, var( --cmdroom-accent-dark ) );
+	max-width: 680px;
+}
+
+.cmdroom-reco-invite-form {
+	padding: 14px 16px;
+	margin: 10px 0 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	max-width: 480px;
+}
+
+.cmdroom-reco-invite-row {
+	display: flex;
+	gap: 10px;
+}
+
+.cmdroom-reco-invite-row input {
+	flex: 1;
+}
+
+.cmdroom-reco-friends-list {
+	padding: 0;
+}
+
+.cmdroom-reco-friend-row {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 12px 16px;
+	border-bottom: 1px solid var( --cmdroom-divider );
+}
+
+.cmdroom-reco-friend-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-reco-friend-row--pending {
+	opacity: .7;
+}
+
+.cmdroom-reco-friend-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.cmdroom-reco-exchange-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 260px, 1fr ) );
+	gap: 18px;
+	margin-bottom: 14px;
+}

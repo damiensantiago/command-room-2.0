@@ -1,0 +1,483 @@
+/*
+ * Command Room — pantalla "Servidor" (Redirecciones + Monitor 404 +
+ * Limpieza HTTP/permalinks, antes tres pantallas sueltas).
+ * Carga junto a meta-editor.css (mismo .cmdroom-metadata-wrap trae los
+ * tokens --cmdroom-*). Introduce las clases .cr-* genéricas (tarjeta, tabla,
+ * pestaña, botones, toggle, chip, pill, input, label) que el handoff pide
+ * reutilizar — hasta ahora cada pantalla las redefinía suelta; aquí viven
+ * completas por primera vez.
+ */
+
+.cmdroom-servidor-wrap .cmdroom-md-container {
+	max-width: none;
+}
+
+.cmdroom-servidor-wrap .cmdroom-md-intro {
+	max-width: 900px;
+}
+
+/* — Tarjeta y tabla genéricas — */
+
+.cr-card {
+	background: var(--cmdroom-bg);
+	border: 2px solid var(--cmdroom-divider);
+	border-radius: 0;
+	overflow-x: auto;
+}
+
+.cr-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13.5px;
+}
+
+.cr-table th {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: #fff;
+	background: var(--cr-table-head);
+	padding: 10px 14px;
+	border-bottom: none;
+	text-align: left;
+}
+
+.cr-table th div {
+	color: rgba(255, 255, 255, .7);
+}
+
+.cr-table td {
+	padding: 12px 14px;
+	border-bottom: 1px solid var(--cmdroom-divider);
+	vertical-align: middle;
+}
+
+.cr-table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.cr-table-wrap {
+	overflow-x: auto;
+}
+
+/* — Pestañas — */
+
+.cr-tabs {
+	display: flex;
+	border-bottom: 2px solid var(--cmdroom-divider);
+	margin-bottom: 20px;
+	overflow-x: auto;
+}
+
+.cr-tab {
+	font-weight: 600;
+	font-size: 13.5px;
+	padding: 10px 16px;
+	color: var(--cmdroom-text-muted);
+	border-bottom: 3px solid transparent;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.cr-tab.is-active {
+	color: var(--cmdroom-text);
+	border-bottom-color: var(--cmdroom-accent);
+}
+
+.cr-tab:hover {
+	color: var(--cmdroom-text);
+}
+
+/* — Botones — */
+
+.cr-btn-primary,
+.cr-btn-secondary {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 600;
+	font-size: 13.5px;
+	padding: 9px 18px;
+	border-radius: 0;
+	cursor: pointer;
+	text-decoration: none;
+	line-height: 1.2;
+}
+
+.cr-btn-primary {
+	background: var(--cmdroom-accent);
+	border: 2px solid var(--cmdroom-accent);
+	color: #fff;
+}
+
+.cr-btn-primary:hover {
+	background: var(--cmdroom-accent-dark);
+	border-color: var(--cmdroom-accent-dark);
+	color: #fff;
+}
+
+.cr-btn-secondary {
+	background: var(--cmdroom-bg);
+	border: 2px solid var(--cmdroom-divider);
+	color: var(--cmdroom-text);
+}
+
+.cr-btn-secondary:hover {
+	background: var(--cmdroom-neutral-100);
+}
+
+.cr-btn-compact {
+	padding: 6px 10px !important;
+	font-size: 12.5px !important;
+}
+
+/* — Toggle — */
+
+.cr-toggle {
+	position: relative;
+	display: inline-block;
+	width: 38px;
+	height: 22px;
+	flex: none;
+	border-radius: 99px;
+	background: var(--cmdroom-neutral-300, #d7d3d3);
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	vertical-align: middle;
+}
+
+.cr-toggle.is-on {
+	background: var(--cmdroom-accent);
+}
+
+.cr-toggle-knob {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #fff;
+	transition: left .15s;
+}
+
+.cr-toggle.is-on .cr-toggle-knob {
+	left: 19px;
+}
+
+.cr-toggle input {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}
+
+/* — Chip / pill — */
+
+.cr-chip {
+	display: inline-flex;
+	padding: 2px 7px;
+	border: 1px solid var(--cmdroom-divider);
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	color: var(--cmdroom-text-muted);
+	white-space: nowrap;
+}
+
+.cr-pill {
+	display: inline-flex;
+	padding: 3px 9px;
+	font-weight: 600;
+	font-size: 11.5px;
+}
+
+.cr-pill-301 {
+	background: var(--cmdroom-neutral-100);
+	color: var(--cmdroom-text);
+}
+
+.cr-pill-other {
+	background: var(--cmdroom-accent-100);
+	color: var(--cmdroom-accent-dark);
+}
+
+/* — Input / label — */
+
+.cr-input {
+	padding: 8px 11px;
+	border: 2px solid var(--cmdroom-divider);
+	font-size: 13.5px;
+	background: var(--cmdroom-bg);
+	color: var(--cmdroom-text);
+	width: 100%;
+}
+
+.cr-input:focus-visible {
+	outline: 2px solid var(--cmdroom-accent);
+	outline-offset: 0;
+}
+
+.cr-label {
+	display: block;
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var(--cmdroom-text-muted);
+	margin-bottom: 6px;
+}
+
+/* — Diálogo — */
+
+.cr-dialog-backdrop {
+	position: fixed;
+	inset: 0;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	background: rgba(0, 0, 0, .35);
+	z-index: 100000;
+}
+
+.cr-dialog-backdrop.is-open {
+	display: flex;
+}
+
+.cr-dialog {
+	width: min(400px, 100%);
+	background: var(--cmdroom-bg);
+	border: 2px solid var(--cmdroom-divider);
+	border-radius: 0;
+	box-shadow: 0 12px 32px rgba(0, 0, 0, .22);
+	padding: 22px;
+}
+
+.cr-dialog-title {
+	font-weight: 600;
+	font-size: 16px;
+	margin: 0 0 16px;
+}
+
+.cr-dialog-field {
+	margin-bottom: 12px;
+}
+
+.cr-dialog-field:last-of-type {
+	margin-bottom: 18px;
+}
+
+.cr-seg {
+	display: inline-flex;
+	border: 2px solid var(--cmdroom-divider);
+}
+
+.cr-seg-opt {
+	padding: 6px 13px;
+	font-weight: 600;
+	font-size: 12.5px;
+	cursor: pointer;
+	color: var(--cmdroom-text);
+	background: transparent;
+	border: none;
+	border-left: 1px solid var(--cmdroom-divider);
+	text-decoration: none;
+	display: inline-block;
+}
+
+.cr-seg-opt:first-child {
+	border-left: none;
+}
+
+.cr-seg-opt.is-active {
+	background: var(--cmdroom-text);
+	color: var(--cmdroom-bg);
+}
+
+.cr-dialog-help {
+	margin-top: 8px;
+}
+
+.cr-dialog-help summary {
+	font-weight: 600;
+	font-size: 12px;
+	color: var(--cmdroom-accent);
+	cursor: pointer;
+	list-style: none;
+}
+
+.cr-dialog-help summary::-webkit-details-marker {
+	display: none;
+}
+
+.cr-dialog-help p {
+	font-size: 12px;
+	line-height: 1.6;
+	color: var(--cmdroom-text-muted);
+	margin: 8px 0 0;
+}
+
+.cr-dialog-help code {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 11.5px;
+	background: var(--cmdroom-neutral-100);
+	padding: 1px 5px;
+}
+
+.cr-dialog-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+/* — Redirecciones — */
+
+.cmdroom-servidor-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 16px;
+}
+
+.cmdroom-servidor-source,
+.cmdroom-servidor-dest {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	word-break: break-all;
+}
+
+.cmdroom-servidor-hits {
+	color: var(--cmdroom-text-muted);
+}
+
+.cmdroom-servidor-actions-cell {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.cmdroom-servidor-empty td {
+	color: var(--cmdroom-text-muted);
+}
+
+.cmdroom-servidor-extra {
+	margin-top: 32px;
+	padding-top: 16px;
+	border-top: 2px solid var(--cmdroom-divider);
+	max-width: 900px;
+}
+
+.cmdroom-servidor-extra h3 {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: var(--cmdroom-accent-dark);
+	margin: 0 0 8px;
+}
+
+.cmdroom-servidor-extra p.description {
+	font-size: 12.5px;
+	color: var(--cmdroom-text-muted);
+}
+
+/* — Monitor 404 — */
+
+.cmdroom-servidor-404-header {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-bottom: 16px;
+	align-items: center;
+}
+
+.cmdroom-servidor-404-toggle-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.cmdroom-servidor-404-toggle-label {
+	font-weight: 600;
+	font-size: 13.5px;
+}
+
+.cmdroom-servidor-404-toggle-note {
+	font-size: 13px;
+	color: var(--cmdroom-text-muted);
+}
+
+.cmdroom-servidor-404-referrer {
+	color: var(--cmdroom-text-muted);
+}
+
+.cmdroom-servidor-404-lastseen {
+	color: var(--cmdroom-text-muted);
+	white-space: nowrap;
+}
+
+.cmdroom-servidor-404-note {
+	font-size: 12.5px;
+	line-height: 1.55;
+	color: var(--cmdroom-text-muted);
+	margin-top: 10px;
+}
+
+.cmdroom-servidor-404-paused .cr-table-wrap {
+	opacity: .45;
+}
+
+.cmdroom-servidor-404-paused-note {
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+/* — Limpieza — */
+
+.cmdroom-servidor-clean-list {
+	max-width: 900px;
+}
+
+.cmdroom-servidor-clean-row {
+	display: flex;
+	gap: 16px;
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--cmdroom-divider);
+	align-items: center;
+}
+
+.cmdroom-servidor-clean-row:last-child {
+	border-bottom: none;
+}
+
+.cmdroom-servidor-clean-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.cmdroom-servidor-clean-title {
+	font-weight: 600;
+	font-size: 13.5px;
+	margin: 0 0 3px;
+}
+
+.cmdroom-servidor-clean-desc {
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--cmdroom-text-muted);
+	margin: 0;
+}
+
+.cmdroom-servidor-clean-chip {
+	flex: none;
+}
+
+@media (max-width: 600px) {
+	.cmdroom-servidor-clean-row {
+		flex-wrap: wrap;
+	}
+	.cmdroom-servidor-clean-chip {
+		order: 3;
+		margin-left: 54px;
+	}
+}

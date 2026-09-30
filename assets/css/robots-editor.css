@@ -1,0 +1,188 @@
+/*
+ * Command Room — pantalla "Robots.txt".
+ * Desde el rediseño 2026-09-23 unifica el editor del contenido base con el
+ * control de bots de IA (la pantalla aparte "Bots de IA" desaparece).
+ * Carga junto a meta-editor.css (mismo .cmdroom-metadata-wrap trae los
+ * tokens --cmdroom-*) y añade solo lo propio de esta pantalla.
+ */
+
+.cmdroom-robots-textarea {
+	display: block;
+	width: 100%;
+	background: var(--cmdroom-terminal-bg);
+	color: var(--cmdroom-terminal-text);
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	line-height: 1.7;
+	padding: 16px;
+	border: none;
+	outline: none;
+	resize: vertical;
+	min-height: calc(12 * 1.7 * 12.5px);
+}
+
+.cmdroom-robots-auto {
+	background: var(--cmdroom-terminal-bg);
+	border-top: 1px dashed #333;
+	padding: 12px 16px 16px;
+}
+
+.cmdroom-robots-auto-label {
+	display: block;
+	font-weight: 600;
+	font-size: 10.5px;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: #8a8a8a;
+	margin: 0 0 8px;
+}
+
+.cmdroom-robots-preview {
+	margin: 0;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	line-height: 1.7;
+	white-space: pre-wrap;
+	word-break: break-word;
+	color: #8a8a8a;
+}
+
+.cmdroom-robots-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px 20px;
+	margin-top: 22px;
+}
+
+.cmdroom-robots-view-link {
+	font-weight: 600;
+	font-size: 13px;
+	color: var(--cmdroom-accent-dark);
+	text-decoration: none;
+}
+
+.cmdroom-robots-view-link:hover {
+	text-decoration: underline;
+}
+
+/* — Tabla de bots — */
+
+.cmdroom-robots-section {
+	margin-top: 48px;
+	padding-top: 16px;
+	border-top: 2px solid var(--cmdroom-divider);
+	max-width: 1000px;
+}
+
+.cmdroom-robots-section-title {
+	font-weight: 600;
+	font-size: 11.5px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: var(--cmdroom-accent-dark);
+	margin: 0 0 8px;
+}
+
+.cmdroom-robots-section-help {
+	font-size: 13.5px;
+	line-height: 1.55;
+	color: var(--cmdroom-text-muted);
+	margin: 0 0 14px;
+}
+
+.cr-card {
+	background: var(--cmdroom-bg);
+	border: 2px solid var(--cmdroom-divider);
+	border-radius: 0;
+}
+
+.cmdroom-robots-table-wrap {
+	overflow-x: auto;
+}
+
+.cmdroom-robots-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12.5px;
+}
+
+.cmdroom-robots-table th,
+.cmdroom-robots-table td {
+	padding: 8px 10px;
+	border-bottom: 1px solid var(--cmdroom-divider);
+	text-align: left;
+	vertical-align: top;
+}
+
+.cmdroom-robots-table thead th {
+	font-weight: 600;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: .03em;
+	color: #fff;
+	background: var(--cr-table-head);
+	border-bottom: none;
+	vertical-align: bottom;
+}
+
+.cmdroom-robots-table thead th:nth-child(1) { width: 80px; }
+.cmdroom-robots-table thead th:nth-child(2) { width: 170px; }
+.cmdroom-robots-table thead th:nth-child(3) { width: 110px; }
+.cmdroom-robots-table thead th:nth-child(5) { width: 250px; }
+
+.cmdroom-robots-th-help {
+	display: block;
+	font-weight: 400;
+	font-size: 11px;
+	text-transform: none;
+	letter-spacing: normal;
+	margin-top: 2px;
+}
+
+.cmdroom-robots-table code {
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12.5px;
+	background: var(--cmdroom-neutral-100);
+	padding: 2px 6px;
+}
+
+.cmdroom-robots-company-cell,
+.cmdroom-robots-company-text {
+	font-weight: 600;
+}
+
+.cmdroom-robots-desc-cell,
+.cmdroom-robots-desc-text {
+	color: var(--cmdroom-text-muted);
+	line-height: 1.5;
+}
+
+.cmdroom-robots-row.is-blocked {
+	background: var(--cmdroom-accent-100);
+}
+
+.cmdroom-robots-paths-label {
+	display: block;
+	font-weight: 600;
+	font-size: 11px;
+	color: var(--cmdroom-text-muted);
+	margin-bottom: 3px;
+}
+
+.cmdroom-robots-paths {
+	width: 100%;
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	padding: 6px 9px;
+}
+
+.cmdroom-robots-add-row {
+	background: var(--cmdroom-neutral-100);
+}
+
+.cmdroom-robots-add-btn {
+	white-space: nowrap;
+	font-size: 12.5px !important;
+	padding: 7px 12px !important;
+}

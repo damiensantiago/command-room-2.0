@@ -1,0 +1,306 @@
+/*
+ * Command Room — pantalla "Datos estructurados" (Schema).
+ * Se carga junto a meta-editor.css (mismo elemento .cmdroom-metadata-wrap
+ * trae los tokens --cmdroom-*) y añade solo lo propio de esta pantalla:
+ * chips múltiples por pestaña, menú "+ Añadir" y la cuadrícula de Librería.
+ */
+
+.cmdroom-schema-tabs {
+	display: flex;
+	overflow-x: auto;
+	border-bottom: 2px solid var(--cmdroom-divider);
+	margin-bottom: 14px;
+}
+
+.cmdroom-schema-tabs .cmdroom-md-tab {
+	flex: none;
+}
+
+/* Fila de chips de bloques asignados */
+
+.cmdroom-schema-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 20px;
+}
+
+.cmdroom-schema-chip {
+	display: inline-flex;
+	align-items: stretch;
+	border: 1px solid var(--cmdroom-divider);
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	background: transparent;
+}
+
+.cmdroom-schema-chip.is-selected {
+	background: var(--cmdroom-accent-100, #fbe4de);
+	color: var(--cmdroom-accent-dark);
+	border-color: var(--cmdroom-accent);
+}
+
+.cmdroom-schema-chip-name {
+	border: none;
+	background: transparent;
+	padding: 2px 4px 2px 7px;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+}
+
+.cmdroom-schema-chip-remove {
+	border: none;
+	background: transparent;
+	padding: 2px 7px 2px 4px;
+	font: inherit;
+	color: inherit;
+	opacity: .6;
+	cursor: pointer;
+}
+
+.cmdroom-schema-chip-remove:hover {
+	opacity: 1;
+	color: var(--cmdroom-accent-dark);
+}
+
+/* Botón + menú "+ Añadir" */
+
+.cmdroom-schema-add-wrap {
+	position: relative;
+}
+
+.cmdroom-schema-add {
+	display: inline-flex;
+	align-items: center;
+	border: 1px dashed var(--cmdroom-divider);
+	background: transparent;
+	color: var(--cmdroom-accent-dark);
+	font-family: ui-monospace, Menlo, monospace;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 2px 8px;
+	cursor: pointer;
+}
+
+.cmdroom-schema-menu {
+	position: absolute;
+	top: calc(100% + 6px);
+	left: 0;
+	z-index: 20;
+	width: 280px;
+	background: var(--cmdroom-bg);
+	border: 2px solid var(--cmdroom-text);
+	box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
+	border-radius: 0;
+}
+
+.cmdroom-schema-menu[hidden] {
+	display: none;
+}
+
+.cmdroom-schema-menu-new {
+	display: block;
+	width: 100%;
+	text-align: left;
+	border: none;
+	border-bottom: 2px solid var(--cmdroom-divider);
+	background: transparent;
+	padding: 12px 14px;
+	cursor: pointer;
+	font-family: inherit;
+}
+
+.cmdroom-schema-menu-new-title {
+	font-weight: 600;
+	font-size: 13px;
+	color: var(--cmdroom-accent-dark);
+}
+
+.cmdroom-schema-menu-new-desc {
+	font-size: 12px;
+	color: var(--cmdroom-text-muted);
+	margin-top: 2px;
+}
+
+.cmdroom-schema-menu-header {
+	font-weight: 600;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: var(--cmdroom-text-muted);
+	padding: 10px 14px 6px;
+}
+
+.cmdroom-schema-menu-list {
+	max-height: 240px;
+	overflow-y: auto;
+}
+
+.cmdroom-schema-menu-item {
+	display: block;
+	width: 100%;
+	text-align: left;
+	border: none;
+	background: transparent;
+	padding: 8px;
+	cursor: pointer;
+	font-family: inherit;
+}
+
+.cmdroom-schema-menu-item:hover {
+	background: var(--cmdroom-neutral-100, #ebebea);
+}
+
+.cmdroom-schema-menu-item-name {
+	font-family: ui-monospace, Menlo, monospace;
+	font-weight: 600;
+	font-size: 12.5px;
+	color: var(--cmdroom-text);
+}
+
+.cmdroom-schema-menu-item-desc {
+	font-size: 11.5px;
+	color: var(--cmdroom-text-muted);
+	margin-top: 2px;
+}
+
+/* Las claves JSON ("@type", "name"...) se pintan en blanco, igual que el
+   resto del texto -- solo las %variables% reales (.cmdroom-md-var, en
+   meta-editor.css) llevan el naranja de acento, para que resalten de
+   verdad en vez de perderse entre el resto de claves en el mismo color. */
+.cmdroom-md-code .cmdroom-md-key {
+	color: var(--cmdroom-terminal-text);
+}
+
+.cmdroom-schema-empty {
+	font-size: 13px;
+	color: var(--cmdroom-text-muted);
+	margin: 0 0 20px;
+}
+
+/* Librería */
+
+.cmdroom-schema-library-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 12px;
+}
+
+.cmdroom-schema-btn {
+	background: #fff;
+	border: 1.5px solid var(--cmdroom-divider);
+	border-radius: 0;
+	padding: 6px 14px;
+	font: 600 12px "Archivo", sans-serif;
+	color: var(--cmdroom-text);
+	cursor: pointer;
+}
+.cmdroom-schema-btn:hover {
+	border-color: var(--cmdroom-accent);
+}
+.cmdroom-schema-btn-primary {
+	background: var(--cmdroom-accent);
+	border-color: var(--cmdroom-accent);
+	color: #fff;
+}
+.cmdroom-schema-btn-primary:hover {
+	background: var(--cmdroom-accent-dark);
+}
+
+.cmdroom-schema-library-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 12px;
+}
+
+.cmdroom-schema-card.is-editing {
+	grid-column: 1 / -1;
+	border-color: var(--cmdroom-accent);
+}
+
+.cmdroom-schema-card-badges {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.cmdroom-schema-badge.custom {
+	background: #e0e7ff;
+	color: #3730a3;
+}
+.cmdroom-schema-badge.edited {
+	background: #dcfce7;
+	color: #15803d;
+}
+
+.cmdroom-schema-desc-input {
+	width: 100%;
+	border: 1.5px solid var(--cmdroom-divider);
+	border-radius: 0;
+	padding: 8px 10px;
+	font: 400 12.5px "Archivo", sans-serif;
+	color: var(--cmdroom-text);
+	resize: vertical;
+	margin-bottom: 4px;
+}
+
+.cmdroom-schema-card {
+	background: var(--cmdroom-bg);
+	border: 2px solid var(--cmdroom-divider);
+	border-radius: 0;
+	padding: 14px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.cmdroom-schema-card-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+.cmdroom-schema-card-name {
+	font-family: ui-monospace, Menlo, monospace;
+	font-weight: 600;
+	font-size: 13px;
+	color: var(--cmdroom-text);
+}
+
+.cmdroom-schema-badge {
+	font-weight: 600;
+	font-size: 11.5px;
+	padding: 3px 9px;
+	white-space: nowrap;
+}
+
+.cmdroom-schema-badge.in-use {
+	background: var(--cmdroom-accent-100, #fbe4de);
+	color: var(--cmdroom-accent-dark);
+}
+
+.cmdroom-schema-badge.available {
+	background: var(--cmdroom-neutral-100, #ebebea);
+	color: var(--cmdroom-text-muted);
+}
+
+.cmdroom-schema-card-desc {
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var(--cmdroom-text-muted);
+}
+
+.cmdroom-schema-card-footer {
+	font-size: 11.5px;
+	color: var(--cmdroom-text-muted);
+}
+
+/* Ancho: nada debe forzar scroll horizontal de toda la página */
+
+.cmdroom-schema-wrap #wpcontent,
+.cmdroom-schema-wrap {
+	min-width: 0;
+}

@@ -1,0 +1,139 @@
+/* Command Room — Carrusel de recomendación de contenidos (front-end).
+   Solo se encola cuando el componente está activo
+   (Cmdroom_Reco::maybe_enqueue_frontend()). Igual que affiliate-frontend.css:
+   NO usa los tokens --cmdroom-* del admin (Modernist) -- reproduce "el estilo
+   del tema del sitio" (radios 10-12px, monoespaciada en categoría) porque en
+   producción hereda la apariencia del tema activo. Compartida por admin
+   (vista previa, Cmdroom_Components_Admin::enqueue_assets()) y front-end
+   real -- los dos usan Cmdroom_Reco::render(), nunca se desincronizan. */
+
+.cmdroom-reco {
+	--cr-reco-accent: #ec3013;
+	--cr-reco-accent-dark: #a81f0a;
+	--cr-reco-text: #201e1d;
+	--cr-reco-muted: #6b7280;
+	--cr-reco-bg: #f3f2f2;
+	--cr-reco-divider: #dcdad9;
+	--cr-reco-card-bg: #ffffff;
+
+	display: block;
+	background: var( --cr-reco-bg );
+	border: 1px solid var( --cr-reco-divider );
+	border-radius: 12px;
+	padding: 22px;
+	margin: 24px 0;
+	color: var( --cr-reco-text );
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.cr-reco-title {
+	font-weight: 700;
+	font-size: 19px;
+	line-height: 1.3;
+	margin: 0 0 16px;
+}
+
+.cr-reco-list {
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 170px, 1fr ) );
+	gap: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+.cr-reco-item {
+	margin: 0;
+}
+
+.cr-reco-link {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: var( --cr-reco-card-bg );
+	border: 1px solid var( --cr-reco-divider );
+	border-radius: 10px;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+}
+
+.cr-reco-media {
+	display: block;
+	height: 110px;
+	border-bottom: 1px solid var( --cr-reco-divider );
+	background: #fafafa;
+}
+
+.cr-reco-media img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.cr-reco-img-placeholder {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: repeating-linear-gradient( 45deg, #f0f0ef, #f0f0ef 8px, #e6e5e4 8px, #e6e5e4 16px );
+}
+
+.cr-reco-body {
+	padding: 14px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	flex: 1;
+}
+
+.cr-reco-meta-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.cr-reco-cat {
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-weight: 600;
+	font-size: 10.5px;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var( --cr-reco-accent-dark );
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+.cr-reco-pill-pinned {
+	font-size: 10px;
+}
+
+.cr-reco-item-title {
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 1.4;
+	text-decoration: underline;
+	text-underline-offset: 4px;
+	text-wrap: pretty;
+}
+
+.cr-reco-domain {
+	margin-top: auto;
+	font-family: ui-monospace, "SF Mono", Menlo, monospace;
+	font-size: 11px;
+	color: var( --cr-reco-muted );
+}
+
+@media ( max-width: 600px ) {
+	.cr-reco-list {
+		grid-auto-flow: column;
+		grid-auto-columns: 78%;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		padding-bottom: 4px;
+	}
+	.cr-reco-item {
+		scroll-snap-align: start;
+	}
+}

@@ -1,0 +1,323 @@
+/*
+ * Command Room — pantalla "General"
+ * Recreación en wp-admin del handoff de alta fidelidad (design system
+ * "Modernist"). Tokens con los mismos valores literales que ya usa
+ * .cmdroom-metadata-wrap (Metas/Schema/Servidor/Configuración) --
+ * --color-accent del handoff = --cmdroom-accent aquí.
+ * Scope: solo .cmdroom-general-wrap, no afecta a otras pantallas.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap');
+
+.cmdroom-general-wrap {
+	--cmdroom-bg: #f3f2f2;
+	--cmdroom-text: #201e1d;
+	--cmdroom-text-muted: #6b7280;
+	--cmdroom-accent: #ec3013;
+	--cmdroom-accent-dark: #a81f0a;
+	--cmdroom-divider: #dcdad9;
+	--cr-table-head: #111827;
+
+	background: var( --cmdroom-bg );
+	color: var( --cmdroom-text );
+	padding: 20px 24px 60px;
+	font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.cmdroom-general-wrap * {
+	box-sizing: border-box;
+}
+
+.cmdroom-general-wrap .cr-card {
+	background: #fff;
+	border: 2px solid var( --cmdroom-divider );
+	border-radius: 0;
+}
+
+.cmdroom-general-wrap .cr-btn-primary {
+	background: var( --cmdroom-accent );
+	color: #fff;
+	border: none;
+	border-radius: 0;
+	padding: 9px 18px;
+	font: 600 13.5px "Archivo", sans-serif;
+	cursor: pointer;
+	text-align: left;
+}
+.cmdroom-general-wrap .cr-btn-primary:hover {
+	background: var( --cmdroom-accent-dark );
+}
+.cmdroom-general-wrap .cr-btn-secondary {
+	background: #fff;
+	color: var( --cmdroom-text );
+	border: 1.5px solid var( --cmdroom-divider );
+	border-radius: 0;
+	padding: 8px 16px;
+	font: 600 12.5px "Archivo", sans-serif;
+	cursor: pointer;
+}
+
+.cmdroom-general-wrap .cr-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 3px 9px;
+	border-radius: 0;
+	font: 600 11.5px "Archivo", sans-serif;
+}
+.cmdroom-pill-green  { background: #dcfce7; color: #15803d; }
+.cmdroom-pill-gray   { background: #f3f4f6; color: #374151; }
+.cmdroom-pill-red    { background: #fee2e2; color: #dc2626; }
+.cmdroom-pill-amber  { background: #fef3c7; color: #b45309; }
+.cmdroom-pill-indigo { background: #eef2ff; color: #4338ca; }
+
+.cmdroom-general-wrap .cr-seg { display: inline-flex; gap: 0; border: 1px solid #d9dce1; }
+.cmdroom-general-wrap .cr-seg-opt {
+	border: none;
+	background: transparent;
+	padding: 6px 13px;
+	border-radius: 0;
+	font: 600 12.5px "Archivo", sans-serif;
+	color: #374151;
+	cursor: pointer;
+}
+.cmdroom-general-wrap .cr-seg-opt.is-active,
+.cmdroom-general-wrap .cr-seg-opt[aria-pressed="true"] {
+	background: #111827;
+	color: #fff;
+}
+
+/* 0. H1 — mismo estilo "cr-page-title" que el resto de pantallas */
+.cmdroom-general-h1 {
+	width: 100%;
+	text-align: center;
+	font-family: inherit;
+	font-weight: 800 !important;
+	font-size: 48px !important;
+	line-height: 0.95;
+	letter-spacing: -0.02em;
+	color: var( --cmdroom-text );
+	margin: 0 0 20px;
+	padding-bottom: 14px;
+	border-bottom: 4px solid var( --cmdroom-text );
+}
+
+.cmdroom-general-h2 {
+	font-size: 16px;
+	font-weight: 600;
+	margin: 28px 0 12px;
+}
+.cmdroom-general-hr { border: none; border-top: 1px solid var( --cmdroom-divider ); margin: 28px 0; }
+
+.cmdroom-general-eyebrow {
+	font: 700 12.5px "Archivo", sans-serif;
+	color: #374151;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+.cmdroom-general-section-sub { font-size: 12px; color: #6b7280; }
+.cmdroom-general-section-intro { font-size: 12.5px; line-height: 1.5; color: #6b7280; margin: 0 0 8px; }
+.cmdroom-general-muted { color: #4b5563; }
+.cmdroom-general-faint { color: #9ca3af; }
+
+/* 1. GSC */
+.cmdroom-gsc-card { padding: 0; overflow: hidden; margin-bottom: 20px; }
+.cmdroom-gsc-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+	padding: 14px 18px;
+	border-bottom: 1px solid #eef0f3;
+}
+.cmdroom-gsc-head-left { display: flex; align-items: baseline; gap: 10px; }
+.cmdroom-gsc-head h2 { font: 700 15px "Archivo", sans-serif; margin: 0; }
+.cmdroom-gsc-range-label { font-size: 12px; color: #6b7280; }
+
+.cmdroom-gsc-cards { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); }
+.cmdroom-gsc-metric-card {
+	display: flex;
+	flex-direction: column;
+	padding: 16px 18px;
+	text-align: left;
+	background: #fff;
+	color: #374151;
+	border: none;
+	border-left: 1px solid #eef0f3;
+	box-shadow: inset 0 -3px 0 var( --cmdroom-gsc-metric-color, transparent );
+	cursor: pointer;
+	transition: background .15s;
+}
+.cmdroom-gsc-metric-card:first-child { border-left: none; }
+.cmdroom-gsc-metric-card.is-active {
+	background: var( --cmdroom-gsc-metric-color );
+	color: #fff;
+	border-left-color: transparent;
+	box-shadow: none;
+}
+.cmdroom-gsc-metric-label { display: flex; align-items: center; gap: 8px; font: 600 12.5px "Archivo", sans-serif; }
+.cmdroom-gsc-metric-box {
+	width: 14px;
+	height: 14px;
+	flex: none;
+	border: 1.5px solid #9ca3af;
+	position: relative;
+}
+.cmdroom-gsc-metric-card.is-active .cmdroom-gsc-metric-box {
+	background: #fff;
+	border-color: #fff;
+}
+.cmdroom-gsc-metric-card.is-active .cmdroom-gsc-metric-box::after {
+	content: "✓";
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+	color: var( --cmdroom-gsc-metric-color );
+}
+.cmdroom-gsc-metric-value { font: 700 30px/1 "Archivo", sans-serif; letter-spacing: -0.01em; margin-top: 14px; }
+.cmdroom-gsc-metric-delta { font-size: 12px; opacity: .85; margin-top: 8px; }
+
+.cmdroom-gsc-chart-wrap { padding: 20px 18px 14px; }
+.cmdroom-gsc-axis-labels { display: flex; justify-content: space-between; font-size: 11px; color: #6b7280; margin-bottom: 6px; }
+.cmdroom-gsc-chart-body { display: grid; grid-template-columns: 36px minmax(0,1fr) 36px; gap: 8px; height: 340px; }
+.cmdroom-gsc-axis-col { display: flex; flex-direction: column; justify-content: space-between; font-size: 11px; color: #9ca3af; }
+.cmdroom-gsc-axis-col-left { text-align: right; }
+.cmdroom-gsc-axis-col-right { text-align: left; }
+.cmdroom-gsc-chart-area { position: relative; }
+.cmdroom-gsc-chart-area svg { width: 100%; height: 100%; display: block; }
+.cmdroom-gsc-xaxis { display: grid; grid-template-columns: 36px minmax(0,1fr) 36px; margin-top: 8px; }
+.cmdroom-gsc-xaxis > span:nth-child(2) { display: flex; justify-content: space-between; font-size: 11px; color: #6b7280; grid-column: 2; }
+
+.cmdroom-gsc-tooltip {
+	position: absolute;
+	background: #111827;
+	color: #fff;
+	padding: 10px 12px;
+	font-size: 12px;
+	min-width: 170px;
+	box-shadow: 0 8px 24px rgba(0,0,0,.18);
+	top: 8px;
+	pointer-events: none;
+	z-index: 5;
+}
+.cmdroom-gsc-tooltip-date { font-weight: 700; margin-bottom: 6px; }
+.cmdroom-gsc-tooltip-row { display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+.cmdroom-gsc-tooltip-row + .cmdroom-gsc-tooltip-row { margin-top: 4px; }
+.cmdroom-gsc-tooltip-sq { width: 8px; height: 8px; flex: none; }
+
+.cmdroom-gsc-top-urls, .cmdroom-general-audit-card, .cmdroom-general-modules-card { padding: 18px; margin-bottom: 20px; }
+.cmdroom-general-audit-card { padding: 0; }
+.cmdroom-general-modules-card { padding: 0; overflow: hidden; }
+.cmdroom-gsc-top-urls h3 { font: 700 12.5px "Archivo", sans-serif; color: #374151; text-transform: uppercase; letter-spacing: .03em; margin: 0 0 12px; }
+
+.cmdroom-gsc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cmdroom-gsc-table th {
+	text-align: left;
+	font: 600 11.5px "Archivo", sans-serif;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: #fff;
+	background: var( --cr-table-head );
+	padding: 10px 14px;
+	border-bottom: none;
+}
+.cmdroom-gsc-table th div { color: rgba(255, 255, 255, .7); }
+.cmdroom-gsc-table td { padding: 10px 14px; border-bottom: 1px solid #f0f1f3; color: #201e1d; }
+.cmdroom-gsc-table tr:last-child td { border-bottom: none; }
+.cmdroom-gsc-table a { color: #2271b1; text-decoration: none; word-break: break-all; }
+
+.cmdroom-general-modules-table td:first-child { max-width: 220px; }
+.cmdroom-general-module-link { color: #2271b1; font-weight: 600; text-decoration: none; }
+.cmdroom-general-modules-table td:nth-child(2) { max-width: 460px; }
+
+.cmdroom-general-toggle-label { display: inline-flex; cursor: pointer; }
+.cmdroom-general-toggle {
+	width: 38px;
+	height: 22px;
+	border-radius: 99px;
+	position: relative;
+	background: #d1d5db;
+	display: inline-block;
+	flex: none;
+}
+.cmdroom-general-toggle.is-active { background: #4f46e5; }
+.cmdroom-general-toggle input[type="checkbox"] { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.cmdroom-general-toggle-knob {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	transition: left .15s;
+	pointer-events: none;
+}
+.cmdroom-general-toggle.is-active .cmdroom-general-toggle-knob { left: 19px; }
+
+/* 2. Patrones de éxito */
+.cmdroom-general-patterns { padding: 18px; margin-bottom: 20px; }
+.cmdroom-general-section-head { display: flex; justify-content: space-between; align-items: baseline; }
+.cmdroom-general-pattern-row {
+	display: grid;
+	grid-template-columns: 28px minmax(0,1fr) auto;
+	gap: 12px;
+	align-items: center;
+	padding: 12px 0;
+	border-bottom: 1px solid #f0f1f3;
+}
+.cmdroom-general-pattern-row:last-child { border-bottom: none; }
+.cmdroom-general-pattern-num { font: 700 13px "Archivo", sans-serif; color: #9ca3af; }
+.cmdroom-general-pattern-title { font: 600 13.5px "Archivo", sans-serif; color: #111827; }
+.cmdroom-general-pattern-desc { font-size: 12.5px; line-height: 1.45; color: #6b7280; margin-top: 2px; }
+.cmdroom-general-pattern-pills { display: flex; gap: 6px; justify-content: flex-end; }
+
+/* 5. Auditoría */
+.cmdroom-general-audit-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+.cmdroom-general-audit-toolbar form { margin: 0; }
+.cmdroom-general-audit-toggle {
+	background: none;
+	border: none;
+	color: var( --cmdroom-accent, #ec3013 );
+	font: 600 12px "Archivo", sans-serif;
+	cursor: pointer;
+	padding: 2px 0 2px 8px;
+}
+.cmdroom-general-audit-toggle:hover { text-decoration: underline; }
+tr[data-cr-audit-extra] td:first-child { padding-left: 28px; color: #6b7280; }
+tr[data-cr-audit-row][hidden] { display: none; }
+
+/* 6. Legibilidad */
+.cmdroom-general-readability-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cmdroom-general-check-card { padding: 16px; }
+.cmdroom-check-row { display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var( --cmdroom-divider ); font-size: 13px; line-height: 1.5; }
+.cmdroom-check-row:last-child { border-bottom: none; }
+.cmdroom-dot { width: 20px; height: 20px; flex: none; display: flex; align-items: center; justify-content: center; margin-top: 1px; font-size: 11px; }
+.cmdroom-dot-good { background: #dcfce7; color: #16a34a; }
+.cmdroom-dot-bad  { background: #fee2e2; color: #dc2626; }
+.cmdroom-dot-ok   { background: #f3f4f6; color: #9ca3af; }
+
+/* 7. Problemas recientes + Privacidad */
+.cmdroom-general-bottom-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; margin-top: 8px; }
+.cmdroom-general-recent-issues, .cmdroom-general-privacy { padding: 18px; }
+.cmdroom-general-bottom-grid .cmdroom-general-eyebrow { display: block; margin-bottom: 10px; }
+.cmdroom-general-recent-row {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 9px 0;
+	border-bottom: 1px solid #f0f1f3;
+	font-size: 13.5px;
+}
+.cmdroom-general-recent-row:last-child { border-bottom: none; }
+.cmdroom-general-privacy p { font-size: 13px; line-height: 1.6; color: #6b7280; margin: 0 0 12px; }
+
+@media (max-width: 900px) {
+	.cmdroom-gsc-cards { grid-template-columns: repeat(2, 1fr); }
+	.cmdroom-general-readability-grid,
+	.cmdroom-general-bottom-grid { grid-template-columns: 1fr; }
+}
